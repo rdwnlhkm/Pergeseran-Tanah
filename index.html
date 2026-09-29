@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoring Pergeseran Tanah</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f2f6f3;
+      color: #222;
+    }
+
+    header {
+      background: #14532d;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .status {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .status h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    #statusText {
+      font-size: 32px;
+      font-weight: bold;
+      color: #16a34a;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .value {
+      font-size: 30px;
+      font-weight: bold;
+      color: #14532d;
+    }
+
+    .unit {
+      color: #777;
+    }
+
+    .info {
+      background: white;
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .info h2 {
+      margin-bottom: 15px;
+      color: #14532d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #777;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🌱 Monitoring Pergeseran Tanah</h1>
+    <p>Sistem Pemantauan Kondisi Tanah Berbasis ESP32</p>
+  </header>
+
+  <div class="container">
+
+    <div class="status">
+      <h2>STATUS KONDISI TANAH</h2>
+      <div id="statusText">AMAN</div>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">💧</div>
+        <h3>Kelembapan</h3>
+        <div class="value" id="moisture">62</div>
+        <div class="unit">%</div>
+      </div>
+
+      <div class="card">
+        <div class="icon">↔️</div>
+        <h3>Pergeseran</h3>
+        <div class="value" id="shift">0.0</div>
+        <div class="unit">cm</div>
+      </div>
+
+      <div class="card">
+        <div class="icon">📐</div>
+        <h3>Kemiringan</h3>
+        <div class="value" id="tilt">0.0</div>
+        <div class="unit">°</div>
+      </div>
+
+    </div>
+
+    <div class="info">
+      <h2>Informasi Sistem</h2>
+      <p>
+        Sistem ini digunakan untuk memantau perubahan kondisi tanah
+        melalui sensor kelembapan, sensor pergeseran, dan sensor kemiringan
+        berbasis ESP32.
+      </p>
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 Monitoring Pergeseran Tanah
+  </footer>
+
+</body>
+</html>
