@@ -95,6 +95,63 @@
       color: #777;
     }
 
+    /* DATA STATIS */
+
+    .static-section {
+      margin-top: 25px;
+    }
+
+    .static-section button {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 15px;
+      background: #14532d;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .static-section button:hover {
+      background: #166534;
+    }
+
+    .static-data {
+      display: none;
+      background: white;
+      margin-top: 15px;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .static-data h2 {
+      margin-bottom: 20px;
+      color: #14532d;
+    }
+
+    .static-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .static-grid div {
+      padding: 15px;
+      background: #f2f6f3;
+      border-radius: 10px;
+    }
+
+    .static-grid strong {
+      color: #14532d;
+    }
+
+    .static-grid p {
+      margin-top: 7px;
+      color: #555;
+    }
+
     .info {
       background: white;
       margin-top: 25px;
@@ -119,6 +176,10 @@
       .cards {
         grid-template-columns: 1fr;
       }
+
+      .static-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -132,11 +193,13 @@
 
   <div class="container">
 
+    <!-- STATUS -->
     <div class="status">
       <h2>STATUS KONDISI TANAH</h2>
       <div id="statusText">AMAN</div>
     </div>
 
+    <!-- DATA REAL-TIME -->
     <div class="cards">
 
       <div class="card">
@@ -162,8 +225,79 @@
 
     </div>
 
+    <!-- DATA STATIS -->
+    <div class="static-section">
+
+      <button onclick="toggleStatic()">
+        📋 DATA STATIS CIKONDONG
+      </button>
+
+      <div id="staticData" class="static-data">
+
+        <h2>Data Statis Desa Cikondong</h2>
+
+        <div class="static-grid">
+
+          <div>
+            <strong>📍 Lokasi</strong>
+            <p>Desa Cikondong</p>
+          </div>
+
+          <div>
+            <strong>🏘️ Kecamatan</strong>
+            <p>Cineam</p>
+          </div>
+
+          <div>
+            <strong>📌 Kabupaten</strong>
+            <p>Tasikmalaya</p>
+          </div>
+
+          <div>
+            <strong>⛰️ Kemiringan Lereng</strong>
+            <p>Data penelitian</p>
+          </div>
+
+          <div>
+            <strong>🪨 Jenis Batuan</strong>
+            <p>Data penelitian</p>
+          </div>
+
+          <div>
+            <strong>🌱 Jenis Tanah</strong>
+            <p>Data penelitian</p>
+          </div>
+
+          <div>
+            <strong>🌾 Tata Guna Lahan</strong>
+            <p>Data penelitian</p>
+          </div>
+
+          <div>
+            <strong>💧 Drainase</strong>
+            <p>Data penelitian</p>
+          </div>
+
+          <div>
+            <strong>📊 Indeks Storie</strong>
+            <p>0,018 (rata-rata)</p>
+          </div>
+
+          <div>
+            <strong>⚠️ Kerentanan</strong>
+            <p>Sedang</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- INFORMASI SISTEM -->
     <div class="info">
       <h2>Informasi Sistem</h2>
+
       <p>
         Sistem ini digunakan untuk memantau perubahan kondisi tanah
         melalui sensor kelembapan, sensor pergeseran, dan sensor kemiringan
@@ -176,6 +310,22 @@
   <footer>
     © 2026 Monitoring Pergeseran Tanah
   </footer>
+
+  <script>
+
+    function toggleStatic() {
+
+      const data = document.getElementById("staticData");
+
+      if (data.style.display === "none" || data.style.display === "") {
+        data.style.display = "block";
+      } else {
+        data.style.display = "none";
+      }
+
+    }
+
+  </script>
 
 </body>
 </html>
