@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monitoring Pergeseran Tanah</title>
+
+  <title>Monitoring Pergeseran Tanah - Cikondong</title>
 
   <style>
     * {
@@ -18,27 +19,34 @@
       color: #222;
     }
 
+    /* ================= HEADER ================= */
+
     header {
       background: #14532d;
       color: white;
-      padding: 25px;
+      padding: 30px 20px;
       text-align: center;
     }
 
     header h1 {
-      font-size: 28px;
+      font-size: 30px;
       margin-bottom: 8px;
     }
 
     header p {
       opacity: 0.9;
+      font-size: 16px;
     }
 
+    /* ================= CONTAINER ================= */
+
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 30px auto;
       padding: 0 20px;
     }
+
+    /* ================= STATUS ================= */
 
     .status {
       background: white;
@@ -60,6 +68,8 @@
       font-weight: bold;
       color: #16a34a;
     }
+
+    /* ================= SENSOR CARDS ================= */
 
     .cards {
       display: grid;
@@ -95,13 +105,13 @@
       color: #777;
     }
 
-    /* DATA STATIS */
+    /* ================= SECTION BUTTON ================= */
 
-    .static-section {
+    .section {
       margin-top: 25px;
     }
 
-    .static-section button {
+    .section-button {
       width: 100%;
       padding: 18px;
       border: none;
@@ -111,13 +121,16 @@
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
+      text-align: left;
     }
 
-    .static-section button:hover {
+    .section-button:hover {
       background: #166534;
     }
 
-    .static-data {
+    /* ================= CONTENT ================= */
+
+    .section-content {
       display: none;
       background: white;
       margin-top: 15px;
@@ -126,31 +139,96 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
-    .static-data h2 {
-      margin-bottom: 20px;
+    .section-content h2 {
       color: #14532d;
+      margin-bottom: 20px;
     }
 
-    .static-grid {
+    /* ================= PARAMETER CARDS ================= */
+
+    .parameter-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 15px;
     }
 
-    .static-grid div {
-      padding: 15px;
+    .parameter-card {
       background: #f2f6f3;
-      border-radius: 10px;
+      border-radius: 12px;
+      padding: 18px;
+      border-left: 5px solid #14532d;
     }
 
-    .static-grid strong {
+    .parameter-card h3 {
       color: #14532d;
+      margin-bottom: 8px;
     }
 
-    .static-grid p {
-      margin-top: 7px;
+    .parameter-card p {
       color: #555;
+      line-height: 1.5;
     }
+
+    .parameter-card .type {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 10px;
+      border-radius: 20px;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    /* ================= TABLE ================= */
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+    }
+
+    th {
+      background: #14532d;
+      color: white;
+      padding: 12px;
+      text-align: center;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background: #f7faf8;
+    }
+
+    tr:hover {
+      background: #ecfdf5;
+    }
+
+    .static-label {
+      color: #2563eb;
+      font-weight: bold;
+    }
+
+    .dynamic-label {
+      color: #d97706;
+      font-weight: bold;
+    }
+
+    .total-row {
+      font-weight: bold;
+      background: #dcfce7 !important;
+    }
+
+    /* ================= INFO ================= */
 
     .info {
       background: white;
@@ -165,6 +243,13 @@
       color: #14532d;
     }
 
+    .info p {
+      line-height: 1.7;
+      color: #555;
+    }
+
+    /* ================= FOOTER ================= */
+
     footer {
       text-align: center;
       padding: 25px;
@@ -172,120 +257,263 @@
       margin-top: 20px;
     }
 
+    /* ================= MOBILE ================= */
+
     @media (max-width: 700px) {
+
+      header h1 {
+        font-size: 24px;
+      }
+
       .cards {
         grid-template-columns: 1fr;
       }
 
-      .static-grid {
+      .parameter-grid {
         grid-template-columns: 1fr;
       }
+
+      .section-button {
+        font-size: 16px;
+      }
     }
+
   </style>
 </head>
 
 <body>
 
+  <!-- ================= HEADER ================= -->
+
   <header>
+
     <h1>🌱 Monitoring Pergeseran Tanah</h1>
-    <p>Sistem Pemantauan Kondisi Tanah Berbasis ESP32</p>
+
+    <p>
+      Sistem Pemantauan Kondisi Tanah Berbasis ESP32
+    </p>
+
+    <p>
+      Desa Cikondong, Kecamatan Cineam, Kabupaten Tasikmalaya
+    </p>
+
   </header>
+
 
   <div class="container">
 
-    <!-- STATUS -->
+    <!-- ================= STATUS ================= -->
+
     <div class="status">
+
       <h2>STATUS KONDISI TANAH</h2>
-      <div id="statusText">AMAN</div>
+
+      <div id="statusText">
+        AMAN
+      </div>
+
     </div>
 
-    <!-- DATA REAL-TIME -->
+
+    <!-- ================= DATA SENSOR ================= -->
+
     <div class="cards">
 
-      <div class="card">
-        <div class="icon">💧</div>
-        <h3>Kelembapan</h3>
-        <div class="value" id="moisture">62</div>
-        <div class="unit">%</div>
-      </div>
+      <!-- KELEMBAPAN -->
 
       <div class="card">
-        <div class="icon">↔️</div>
-        <h3>Pergeseran</h3>
-        <div class="value" id="shift">0.0</div>
-        <div class="unit">cm</div>
+
+        <div class="icon">
+          💧
+        </div>
+
+        <h3>
+          Kelembapan
+        </h3>
+
+        <div class="value" id="moisture">
+          62
+        </div>
+
+        <div class="unit">
+          %
+        </div>
+
       </div>
 
+
+      <!-- PERGESERAN -->
+
       <div class="card">
-        <div class="icon">📐</div>
-        <h3>Kemiringan</h3>
-        <div class="value" id="tilt">0.0</div>
-        <div class="unit">°</div>
+
+        <div class="icon">
+          ↔️
+        </div>
+
+        <h3>
+          Pergeseran
+        </h3>
+
+        <div class="value" id="shift">
+          0.0
+        </div>
+
+        <div class="unit">
+          cm
+        </div>
+
+      </div>
+
+
+      <!-- KEMIRINGAN -->
+
+      <div class="card">
+
+        <div class="icon">
+          📐
+        </div>
+
+        <h3>
+          Kemiringan
+        </h3>
+
+        <div class="value" id="tilt">
+          0.0
+        </div>
+
+        <div class="unit">
+          °
+        </div>
+
       </div>
 
     </div>
 
-    <!-- DATA STATIS -->
-    <div class="static-section">
 
-      <button onclick="toggleStatic()">
-        📋 DATA STATIS CIKONDONG
+    <!-- ================================================= -->
+    <!-- DATA STATIS -->
+    <!-- ================================================= -->
+
+    <div class="section">
+
+      <button
+        class="section-button"
+        onclick="toggleSection('staticData')">
+
+        🗺️ DATA STATIS CIKONDONG
+
       </button>
 
-      <div id="staticData" class="static-data">
 
-        <h2>Data Statis Desa Cikondong</h2>
+      <div
+        id="staticData"
+        class="section-content">
 
-        <div class="static-grid">
+        <h2>
+          5 Parameter Statis
+        </h2>
 
-          <div>
-            <strong>📍 Lokasi</strong>
-            <p>Desa Cikondong</p>
+
+        <div class="parameter-grid">
+
+
+          <!-- 1 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              1. ⛰️ Kemiringan Lereng
+            </h3>
+
+            <p>
+              <strong>Kondisi:</strong>
+              4°–24°, bagian mahkota 13°–28°
+            </p>
+
+            <span class="type">
+              STATIS
+            </span>
+
           </div>
 
-          <div>
-            <strong>🏘️ Kecamatan</strong>
-            <p>Cineam</p>
+
+          <!-- 2 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              2. 🪨 Jenis Batuan
+            </h3>
+
+            <p>
+              <strong>Kondisi:</strong>
+              Breksi vulkanik yang mengalami pelapukan dan deformasi
+            </p>
+
+            <span class="type">
+              STATIS
+            </span>
+
           </div>
 
-          <div>
-            <strong>📌 Kabupaten</strong>
-            <p>Tasikmalaya</p>
+
+          <!-- 3 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              3. 🌱 Jenis Tanah
+            </h3>
+
+            <p>
+              <strong>Kondisi:</strong>
+              Berdasarkan data/peta jenis tanah Cikondong
+            </p>
+
+            <span class="type">
+              STATIS
+            </span>
+
           </div>
 
-          <div>
-            <strong>⛰️ Kemiringan Lereng</strong>
-            <p>Data penelitian</p>
+
+          <!-- 4 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              4. 🌾 Tata Guna Lahan
+            </h3>
+
+            <p>
+              <strong>Kondisi:</strong>
+              Permukiman, kebun, ladang, sawah, dan hutan
+            </p>
+
+            <span class="type">
+              STATIS
+            </span>
+
           </div>
 
-          <div>
-            <strong>🪨 Jenis Batuan</strong>
-            <p>Data penelitian</p>
-          </div>
 
-          <div>
-            <strong>🌱 Jenis Tanah</strong>
-            <p>Data penelitian</p>
-          </div>
+          <!-- 5 -->
 
-          <div>
-            <strong>🌾 Tata Guna Lahan</strong>
-            <p>Data penelitian</p>
-          </div>
+          <div class="parameter-card">
 
-          <div>
-            <strong>💧 Drainase</strong>
-            <p>Data penelitian</p>
-          </div>
+            <h3>
+              5. 💧 Kondisi Drainase
+            </h3>
 
-          <div>
-            <strong>📊 Indeks Storie</strong>
-            <p>0,018 (rata-rata)</p>
-          </div>
+            <p>
+              <strong>Kondisi:</strong>
+              Aliran permukaan tidak terkendali dan infiltrasi melalui rekahan
+            </p>
 
-          <div>
-            <strong>⚠️ Kerentanan</strong>
-            <p>Sedang</p>
+            <span class="type">
+              STATIS
+            </span>
+
           </div>
 
         </div>
@@ -294,33 +522,527 @@
 
     </div>
 
+
+    <!-- ================================================= -->
+    <!-- DATA DINAMIS -->
+    <!-- ================================================= -->
+
+    <div class="section">
+
+      <button
+        class="section-button"
+        onclick="toggleSection('dynamicData')">
+
+        📡 DATA DINAMIS / REAL-TIME
+
+      </button>
+
+
+      <div
+        id="dynamicData"
+        class="section-content">
+
+        <h2>
+          4 Parameter Dinamis
+        </h2>
+
+
+        <div class="parameter-grid">
+
+
+          <!-- 6 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              6. 🌧️ Curah Hujan
+            </h3>
+
+            <p>
+              <strong>Dasar data:</strong>
+              Data curah hujan 2016–2025
+            </p>
+
+            <p>
+              <strong>Sumber:</strong>
+              Data sekunder
+            </p>
+
+            <span class="type">
+              DINAMIS
+            </span>
+
+          </div>
+
+
+          <!-- 7 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              7. 💦 Kadar Air Tanah / Kejenuhan
+            </h3>
+
+            <p>
+              <strong>Dasar data:</strong>
+              Berdasarkan kondisi infiltrasi dan hujan
+            </p>
+
+            <p>
+              <strong>Monitoring:</strong>
+              Sensor kelembapan tanah
+            </p>
+
+            <span class="type">
+              DINAMIS
+            </span>
+
+          </div>
+
+
+          <!-- 8 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              8. 📐 Tilt Rate
+            </h3>
+
+            <p>
+              <strong>Dasar data:</strong>
+              Perubahan kemiringan yang direpresentasikan oleh MPU6050
+            </p>
+
+            <p>
+              <strong>Monitoring:</strong>
+              MPU6050
+            </p>
+
+            <span class="type">
+              DINAMIS
+            </span>
+
+          </div>
+
+
+          <!-- 9 -->
+
+          <div class="parameter-card">
+
+            <h3>
+              9. ↔️ Pergeseran Horizontal
+            </h3>
+
+            <p>
+              <strong>Dasar data:</strong>
+              Perubahan posisi horizontal yang direpresentasikan melalui potensiometer
+            </p>
+
+            <p>
+              <strong>Prototype:</strong>
+              Potensiometer
+            </p>
+
+            <span class="type">
+              DINAMIS
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- BOBOT 9 PARAMETER -->
+    <!-- ================================================= -->
+
+    <div class="section">
+
+      <button
+        class="section-button"
+        onclick="toggleSection('weightData')">
+
+        📊 BOBOT 9 PARAMETER PENELITIAN
+
+      </button>
+
+
+      <div
+        id="weightData"
+        class="section-content">
+
+        <h2>
+          Pembobotan Parameter
+        </h2>
+
+        <p style="margin-bottom:20px; color:#555; line-height:1.6;">
+          Bobot parameter diperoleh berdasarkan skor frekuensi dan
+          relevansi terhadap kondisi Cikondong. Total skor seluruh
+          parameter adalah 65 dengan total bobot 100%.
+        </p>
+
+
+        <div class="table-container">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>No</th>
+
+                <th>Parameter</th>
+
+                <th>Jenis</th>
+
+                <th>
+                  Skor<br>
+                  Frekuensi
+                </th>
+
+                <th>
+                  Skor<br>
+                  Relevansi
+                </th>
+
+                <th>
+                  Total<br>
+                  Skor
+                </th>
+
+                <th>
+                  Bobot
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+              <!-- 1 -->
+
+              <tr>
+
+                <td>1</td>
+
+                <td>
+                  Kemiringan Lereng
+                </td>
+
+                <td class="static-label">
+                  Statis
+                </td>
+
+                <td>5</td>
+
+                <td>4</td>
+
+                <td>9</td>
+
+                <td>13,85%</td>
+
+              </tr>
+
+
+              <!-- 2 -->
+
+              <tr>
+
+                <td>2</td>
+
+                <td>
+                  Jenis Batuan
+                </td>
+
+                <td class="static-label">
+                  Statis
+                </td>
+
+                <td>5</td>
+
+                <td>5</td>
+
+                <td>10</td>
+
+                <td>15,38%</td>
+
+              </tr>
+
+
+              <!-- 3 -->
+
+              <tr>
+
+                <td>3</td>
+
+                <td>
+                  Jenis Tanah
+                </td>
+
+                <td class="static-label">
+                  Statis
+                </td>
+
+                <td>3</td>
+
+                <td>4</td>
+
+                <td>7</td>
+
+                <td>10,77%</td>
+
+              </tr>
+
+
+              <!-- 4 -->
+
+              <tr>
+
+                <td>4</td>
+
+                <td>
+                  Tata Guna Lahan
+                </td>
+
+                <td class="static-label">
+                  Statis
+                </td>
+
+                <td>4</td>
+
+                <td>5</td>
+
+                <td>9</td>
+
+                <td>13,85%</td>
+
+              </tr>
+
+
+              <!-- 5 -->
+
+              <tr>
+
+                <td>5</td>
+
+                <td>
+                  Kondisi Drainase
+                </td>
+
+                <td class="static-label">
+                  Statis
+                </td>
+
+                <td>2</td>
+
+                <td>3</td>
+
+                <td>5</td>
+
+                <td>7,69%</td>
+
+              </tr>
+
+
+              <!-- 6 -->
+
+              <tr>
+
+                <td>6</td>
+
+                <td>
+                  Curah Hujan
+                </td>
+
+                <td class="dynamic-label">
+                  Dinamis
+                </td>
+
+                <td>4</td>
+
+                <td>3</td>
+
+                <td>7</td>
+
+                <td>10,77%</td>
+
+              </tr>
+
+
+              <!-- 7 -->
+
+              <tr>
+
+                <td>7</td>
+
+                <td>
+                  Kadar Air Tanah/Kejenuhan
+                </td>
+
+                <td class="dynamic-label">
+                  Dinamis
+                </td>
+
+                <td>1</td>
+
+                <td>5</td>
+
+                <td>6</td>
+
+                <td>9,23%</td>
+
+              </tr>
+
+
+              <!-- 8 -->
+
+              <tr>
+
+                <td>8</td>
+
+                <td>
+                  Tilt Rate
+                </td>
+
+                <td class="dynamic-label">
+                  Dinamis
+                </td>
+
+                <td>1</td>
+
+                <td>5</td>
+
+                <td>6</td>
+
+                <td>9,23%</td>
+
+              </tr>
+
+
+              <!-- 9 -->
+
+              <tr>
+
+                <td>9</td>
+
+                <td>
+                  Pergeseran Horizontal
+                </td>
+
+                <td class="dynamic-label">
+                  Dinamis
+                </td>
+
+                <td>1</td>
+
+                <td>5</td>
+
+                <td>6</td>
+
+                <td>9,23%</td>
+
+              </tr>
+
+
+              <!-- TOTAL -->
+
+              <tr class="total-row">
+
+                <td colspan="5">
+                  TOTAL
+                </td>
+
+                <td>
+                  65
+                </td>
+
+                <td>
+                  100%
+                </td>
+
+              </tr>
+
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================================================= -->
     <!-- INFORMASI SISTEM -->
+    <!-- ================================================= -->
+
     <div class="info">
-      <h2>Informasi Sistem</h2>
+
+      <h2>
+        ℹ️ Informasi Sistem
+      </h2>
 
       <p>
         Sistem ini digunakan untuk memantau perubahan kondisi tanah
-        melalui sensor kelembapan, sensor pergeseran, dan sensor kemiringan
-        berbasis ESP32.
+        melalui integrasi parameter statis dan dinamis. Parameter statis
+        menggambarkan kondisi dasar lokasi, sedangkan parameter dinamis
+        digunakan untuk memantau perubahan kondisi secara berkala.
       </p>
+
+      <br>
+
+      <p>
+        Prototype menggunakan ESP32 sebagai mikrokontroler,
+        sensor kelembapan tanah untuk parameter kadar air,
+        MPU6050 untuk merepresentasikan perubahan kemiringan,
+        dan potensiometer untuk merepresentasikan pergeseran horizontal.
+      </p>
+
     </div>
 
   </div>
 
+
+  <!-- ================= FOOTER ================= -->
+
   <footer>
+
     © 2026 Monitoring Pergeseran Tanah
+    <br>
+    Desa Cikondong - Kecamatan Cineam - Kabupaten Tasikmalaya
+
   </footer>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
 
   <script>
 
-    function toggleStatic() {
+    function toggleSection(id) {
 
-      const data = document.getElementById("staticData");
+      const section = document.getElementById(id);
 
-      if (data.style.display === "none" || data.style.display === "") {
-        data.style.display = "block";
+      if (
+        section.style.display === "none" ||
+        section.style.display === ""
+      ) {
+
+        section.style.display = "block";
+
       } else {
-        data.style.display = "none";
+
+        section.style.display = "none";
+
       }
 
     }
