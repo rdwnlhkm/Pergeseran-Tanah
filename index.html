@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Monitoring Pergeseran Tanah - Cikondong</title>
 
   <style>
@@ -18,8 +17,6 @@
       background: #f2f6f3;
       color: #222;
     }
-
-    /* ================= HEADER ================= */
 
     header {
       background: #14532d;
@@ -36,17 +33,14 @@
     header p {
       opacity: 0.9;
       font-size: 16px;
+      margin-top: 4px;
     }
-
-    /* ================= CONTAINER ================= */
 
     .container {
       max-width: 1100px;
       margin: 30px auto;
       padding: 0 20px;
     }
-
-    /* ================= STATUS ================= */
 
     .status {
       background: white;
@@ -68,8 +62,6 @@
       font-weight: bold;
       color: #16a34a;
     }
-
-    /* ================= SENSOR CARDS ================= */
 
     .cards {
       display: grid;
@@ -105,8 +97,6 @@
       color: #777;
     }
 
-    /* ================= SECTION BUTTON ================= */
-
     .section {
       margin-top: 25px;
     }
@@ -128,8 +118,6 @@
       background: #166534;
     }
 
-    /* ================= CONTENT ================= */
-
     .section-content {
       display: none;
       background: white;
@@ -143,8 +131,6 @@
       color: #14532d;
       margin-bottom: 20px;
     }
-
-    /* ================= PARAMETER CARDS ================= */
 
     .parameter-grid {
       display: grid;
@@ -161,12 +147,19 @@
 
     .parameter-card h3 {
       color: #14532d;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .parameter-card p {
       color: #555;
       line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .source {
+      font-size: 13px;
+      color: #777;
+      margin-top: 8px;
     }
 
     .parameter-card .type {
@@ -179,8 +172,6 @@
       font-size: 13px;
       font-weight: bold;
     }
-
-    /* ================= TABLE ================= */
 
     .table-container {
       overflow-x: auto;
@@ -228,8 +219,6 @@
       background: #dcfce7 !important;
     }
 
-    /* ================= INFO ================= */
-
     .info {
       background: white;
       margin-top: 25px;
@@ -248,8 +237,6 @@
       color: #555;
     }
 
-    /* ================= FOOTER ================= */
-
     footer {
       text-align: center;
       padding: 25px;
@@ -257,10 +244,7 @@
       margin-top: 20px;
     }
 
-    /* ================= MOBILE ================= */
-
     @media (max-width: 700px) {
-
       header h1 {
         font-size: 24px;
       }
@@ -277,243 +261,148 @@
         font-size: 16px;
       }
     }
-
   </style>
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
-
   <header>
-
     <h1>🌱 Monitoring Pergeseran Tanah</h1>
-
-    <p>
-      Sistem Pemantauan Kondisi Tanah Berbasis ESP32
-    </p>
-
-    <p>
-      Desa Cikondong, Kecamatan Cineam, Kabupaten Tasikmalaya
-    </p>
-
+    <p>Sistem Pemantauan Kondisi Tanah Berbasis ESP32</p>
+    <p>Desa Cikondong, Kecamatan Cineam, Kabupaten Tasikmalaya</p>
   </header>
-
 
   <div class="container">
 
-    <!-- ================= STATUS ================= -->
-
+    <!-- STATUS -->
     <div class="status">
-
       <h2>STATUS KONDISI TANAH</h2>
-
-      <div id="statusText">
-        AMAN
-      </div>
-
+      <div id="statusText">AMAN</div>
     </div>
 
-
-    <!-- ================= DATA SENSOR ================= -->
-
+    <!-- DATA SENSOR -->
     <div class="cards">
 
-      <!-- KELEMBAPAN -->
-
       <div class="card">
-
-        <div class="icon">
-          💧
-        </div>
-
-        <h3>
-          Kelembapan
-        </h3>
-
-        <div class="value" id="moisture">
-          62
-        </div>
-
-        <div class="unit">
-          %
-        </div>
-
+        <div class="icon">💧</div>
+        <h3>Kelembapan</h3>
+        <div class="value" id="moisture">62</div>
+        <div class="unit">%</div>
       </div>
 
-
-      <!-- PERGESERAN -->
-
       <div class="card">
-
-        <div class="icon">
-          ↔️
-        </div>
-
-        <h3>
-          Pergeseran
-        </h3>
-
-        <div class="value" id="shift">
-          0.0
-        </div>
-
-        <div class="unit">
-          cm
-        </div>
-
+        <div class="icon">↔️</div>
+        <h3>Pergeseran</h3>
+        <div class="value" id="shift">0.0</div>
+        <div class="unit">cm</div>
       </div>
 
-
-      <!-- KEMIRINGAN -->
-
       <div class="card">
-
-        <div class="icon">
-          📐
-        </div>
-
-        <h3>
-          Kemiringan
-        </h3>
-
-        <div class="value" id="tilt">
-          0.0
-        </div>
-
-        <div class="unit">
-          °
-        </div>
-
+        <div class="icon">📐</div>
+        <h3>Kemiringan</h3>
+        <div class="value" id="tilt">0.0</div>
+        <div class="unit">°</div>
       </div>
 
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- DATA STATIS -->
-    <!-- ================================================= -->
+    <!-- ================= DATA STATIS ================= -->
 
     <div class="section">
 
-      <button
-        class="section-button"
-        onclick="toggleSection('staticData')">
-
+      <button class="section-button" onclick="toggleSection('staticData')">
         🗺️ DATA STATIS CIKONDONG
-
       </button>
 
+      <div id="staticData" class="section-content">
 
-      <div
-        id="staticData"
-        class="section-content">
-
-        <h2>
-          5 Parameter Statis
-        </h2>
-
+        <h2>5 Parameter Statis</h2>
 
         <div class="parameter-grid">
 
-
           <!-- 1 -->
-
           <div class="parameter-card">
-
-            <h3>
-              1. ⛰️ Kemiringan Lereng
-            </h3>
+            <h3>1. ⛰️ Kemiringan Lereng</h3>
 
             <p>
               <strong>Kondisi:</strong>
               4°–24°, bagian mahkota 13°–28°
             </p>
 
-            <span class="type">
-              STATIS
-            </span>
+            <p class="source">
+              Sumber: Badan Geologi (2025)
+            </p>
 
+            <span class="type">STATIS</span>
           </div>
 
 
           <!-- 2 -->
-
           <div class="parameter-card">
-
-            <h3>
-              2. 🪨 Jenis Batuan
-            </h3>
+            <h3>2. 🪨 Jenis Batuan</h3>
 
             <p>
               <strong>Kondisi:</strong>
               Breksi vulkanik yang mengalami pelapukan dan deformasi
             </p>
 
-            <span class="type">
-              STATIS
-            </span>
+            <p class="source">
+              Sumber: Badan Geologi (2025)
+            </p>
 
+            <span class="type">STATIS</span>
           </div>
 
 
           <!-- 3 -->
-
           <div class="parameter-card">
-
-            <h3>
-              3. 🌱 Jenis Tanah
-            </h3>
+            <h3>3. 🌱 Jenis Tanah</h3>
 
             <p>
               <strong>Kondisi:</strong>
               Berdasarkan data/peta jenis tanah Cikondong
             </p>
 
-            <span class="type">
-              STATIS
-            </span>
+            <p class="source">
+              Sumber: Data sekunder
+            </p>
 
+            <span class="type">STATIS</span>
           </div>
 
 
           <!-- 4 -->
-
           <div class="parameter-card">
-
-            <h3>
-              4. 🌾 Tata Guna Lahan
-            </h3>
+            <h3>4. 🌾 Tata Guna Lahan</h3>
 
             <p>
               <strong>Kondisi:</strong>
               Permukiman, kebun, ladang, sawah, dan hutan
             </p>
 
-            <span class="type">
-              STATIS
-            </span>
+            <p class="source">
+              Sumber: Data sekunder
+            </p>
 
+            <span class="type">STATIS</span>
           </div>
 
 
           <!-- 5 -->
-
           <div class="parameter-card">
-
-            <h3>
-              5. 💧 Kondisi Drainase
-            </h3>
+            <h3>5. 💧 Kondisi Drainase</h3>
 
             <p>
               <strong>Kondisi:</strong>
               Aliran permukaan tidak terkendali dan infiltrasi melalui rekahan
             </p>
 
-            <span class="type">
-              STATIS
-            </span>
+            <p class="source">
+              Sumber: Badan Geologi (2025)
+            </p>
 
+            <span class="type">STATIS</span>
           </div>
 
         </div>
@@ -523,130 +412,85 @@
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- DATA DINAMIS -->
-    <!-- ================================================= -->
+    <!-- ================= DATA DINAMIS ================= -->
 
     <div class="section">
 
-      <button
-        class="section-button"
-        onclick="toggleSection('dynamicData')">
-
+      <button class="section-button" onclick="toggleSection('dynamicData')">
         📡 DATA DINAMIS / REAL-TIME
-
       </button>
 
+      <div id="dynamicData" class="section-content">
 
-      <div
-        id="dynamicData"
-        class="section-content">
-
-        <h2>
-          4 Parameter Dinamis
-        </h2>
-
+        <h2>4 Parameter Dinamis</h2>
 
         <div class="parameter-grid">
 
-
           <!-- 6 -->
-
           <div class="parameter-card">
-
-            <h3>
-              6. 🌧️ Curah Hujan
-            </h3>
+            <h3>6. 🌧️ Curah Hujan</h3>
 
             <p>
               <strong>Dasar data:</strong>
               Data curah hujan 2016–2025
             </p>
 
-            <p>
-              <strong>Sumber:</strong>
-              Data sekunder
+            <p class="source">
+              Sumber: Data sekunder
             </p>
 
-            <span class="type">
-              DINAMIS
-            </span>
-
+            <span class="type">DINAMIS</span>
           </div>
 
 
           <!-- 7 -->
-
           <div class="parameter-card">
-
-            <h3>
-              7. 💦 Kadar Air Tanah / Kejenuhan
-            </h3>
+            <h3>7. 💦 Kadar Air Tanah / Kejenuhan</h3>
 
             <p>
               <strong>Dasar data:</strong>
               Berdasarkan kondisi infiltrasi dan hujan
             </p>
 
-            <p>
-              <strong>Monitoring:</strong>
-              Sensor kelembapan tanah
+            <p class="source">
+              Sumber: Literatur/laporan
             </p>
 
-            <span class="type">
-              DINAMIS
-            </span>
-
+            <span class="type">DINAMIS</span>
           </div>
 
 
           <!-- 8 -->
-
           <div class="parameter-card">
-
-            <h3>
-              8. 📐 Tilt Rate
-            </h3>
+            <h3>8. 📐 Tilt Rate</h3>
 
             <p>
               <strong>Dasar data:</strong>
               Perubahan kemiringan yang direpresentasikan oleh MPU6050
             </p>
 
-            <p>
-              <strong>Monitoring:</strong>
-              MPU6050
+            <p class="source">
+              Sumber: Prototype
             </p>
 
-            <span class="type">
-              DINAMIS
-            </span>
-
+            <span class="type">DINAMIS</span>
           </div>
 
 
           <!-- 9 -->
-
           <div class="parameter-card">
-
-            <h3>
-              9. ↔️ Pergeseran Horizontal
-            </h3>
+            <h3>9. ↔️ Pergeseran Horizontal</h3>
 
             <p>
               <strong>Dasar data:</strong>
               Perubahan posisi horizontal yang direpresentasikan melalui potensiometer
             </p>
 
-            <p>
-              <strong>Prototype:</strong>
-              Potensiometer
+            <p class="source">
+              Sumber: Prototype
             </p>
 
-            <span class="type">
-              DINAMIS
-            </span>
-
+            <span class="type">DINAMIS</span>
           </div>
 
         </div>
@@ -656,320 +500,135 @@
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- BOBOT 9 PARAMETER -->
-    <!-- ================================================= -->
+    <!-- ================= BOBOT ================= -->
 
     <div class="section">
 
-      <button
-        class="section-button"
-        onclick="toggleSection('weightData')">
-
+      <button class="section-button" onclick="toggleSection('weightData')">
         📊 BOBOT 9 PARAMETER PENELITIAN
-
       </button>
 
+      <div id="weightData" class="section-content">
 
-      <div
-        id="weightData"
-        class="section-content">
-
-        <h2>
-          Pembobotan Parameter
-        </h2>
+        <h2>Pembobotan 9 Parameter</h2>
 
         <p style="margin-bottom:20px; color:#555; line-height:1.6;">
-          Bobot parameter diperoleh berdasarkan skor frekuensi dan
-          relevansi terhadap kondisi Cikondong. Total skor seluruh
-          parameter adalah 65 dengan total bobot 100%.
+          Total skor seluruh parameter adalah 65 dengan total bobot 100%.
         </p>
-
 
         <div class="table-container">
 
           <table>
 
             <thead>
-
               <tr>
-
                 <th>No</th>
-
                 <th>Parameter</th>
-
                 <th>Jenis</th>
-
-                <th>
-                  Skor<br>
-                  Frekuensi
-                </th>
-
-                <th>
-                  Skor<br>
-                  Relevansi
-                </th>
-
-                <th>
-                  Total<br>
-                  Skor
-                </th>
-
-                <th>
-                  Bobot
-                </th>
-
+                <th>Skor<br>Frekuensi</th>
+                <th>Skor<br>Relevansi</th>
+                <th>Total<br>Skor</th>
+                <th>Bobot</th>
               </tr>
-
             </thead>
-
 
             <tbody>
 
-
-              <!-- 1 -->
-
               <tr>
-
                 <td>1</td>
-
-                <td>
-                  Kemiringan Lereng
-                </td>
-
-                <td class="static-label">
-                  Statis
-                </td>
-
+                <td>Kemiringan Lereng</td>
+                <td class="static-label">Statis</td>
                 <td>5</td>
-
                 <td>4</td>
-
                 <td>9</td>
-
                 <td>13,85%</td>
-
               </tr>
 
-
-              <!-- 2 -->
-
               <tr>
-
                 <td>2</td>
-
-                <td>
-                  Jenis Batuan
-                </td>
-
-                <td class="static-label">
-                  Statis
-                </td>
-
+                <td>Jenis Batuan</td>
+                <td class="static-label">Statis</td>
                 <td>5</td>
-
                 <td>5</td>
-
                 <td>10</td>
-
                 <td>15,38%</td>
-
               </tr>
 
-
-              <!-- 3 -->
-
               <tr>
-
                 <td>3</td>
-
-                <td>
-                  Jenis Tanah
-                </td>
-
-                <td class="static-label">
-                  Statis
-                </td>
-
+                <td>Jenis Tanah</td>
+                <td class="static-label">Statis</td>
                 <td>3</td>
-
                 <td>4</td>
-
                 <td>7</td>
-
                 <td>10,77%</td>
-
               </tr>
 
-
-              <!-- 4 -->
-
               <tr>
-
                 <td>4</td>
-
-                <td>
-                  Tata Guna Lahan
-                </td>
-
-                <td class="static-label">
-                  Statis
-                </td>
-
+                <td>Tata Guna Lahan</td>
+                <td class="static-label">Statis</td>
                 <td>4</td>
-
                 <td>5</td>
-
                 <td>9</td>
-
                 <td>13,85%</td>
-
               </tr>
 
-
-              <!-- 5 -->
-
               <tr>
-
                 <td>5</td>
-
-                <td>
-                  Kondisi Drainase
-                </td>
-
-                <td class="static-label">
-                  Statis
-                </td>
-
+                <td>Kondisi Drainase</td>
+                <td class="static-label">Statis</td>
                 <td>2</td>
-
                 <td>3</td>
-
                 <td>5</td>
-
                 <td>7,69%</td>
-
               </tr>
 
-
-              <!-- 6 -->
-
               <tr>
-
                 <td>6</td>
-
-                <td>
-                  Curah Hujan
-                </td>
-
-                <td class="dynamic-label">
-                  Dinamis
-                </td>
-
+                <td>Curah Hujan</td>
+                <td class="dynamic-label">Dinamis</td>
                 <td>4</td>
-
                 <td>3</td>
-
                 <td>7</td>
-
                 <td>10,77%</td>
-
               </tr>
 
-
-              <!-- 7 -->
-
               <tr>
-
                 <td>7</td>
-
-                <td>
-                  Kadar Air Tanah/Kejenuhan
-                </td>
-
-                <td class="dynamic-label">
-                  Dinamis
-                </td>
-
+                <td>Kadar Air Tanah/Kejenuhan</td>
+                <td class="dynamic-label">Dinamis</td>
                 <td>1</td>
-
                 <td>5</td>
-
                 <td>6</td>
-
                 <td>9,23%</td>
-
               </tr>
 
-
-              <!-- 8 -->
-
               <tr>
-
                 <td>8</td>
-
-                <td>
-                  Tilt Rate
-                </td>
-
-                <td class="dynamic-label">
-                  Dinamis
-                </td>
-
+                <td>Tilt Rate</td>
+                <td class="dynamic-label">Dinamis</td>
                 <td>1</td>
-
                 <td>5</td>
-
                 <td>6</td>
-
                 <td>9,23%</td>
-
               </tr>
-
-
-              <!-- 9 -->
 
               <tr>
-
                 <td>9</td>
-
-                <td>
-                  Pergeseran Horizontal
-                </td>
-
-                <td class="dynamic-label">
-                  Dinamis
-                </td>
-
+                <td>Pergeseran Horizontal</td>
+                <td class="dynamic-label">Dinamis</td>
                 <td>1</td>
-
                 <td>5</td>
-
                 <td>6</td>
-
                 <td>9,23%</td>
-
               </tr>
-
-
-              <!-- TOTAL -->
 
               <tr class="total-row">
-
-                <td colspan="5">
-                  TOTAL
-                </td>
-
-                <td>
-                  65
-                </td>
-
-                <td>
-                  100%
-                </td>
-
+                <td colspan="5">TOTAL</td>
+                <td>65</td>
+                <td>100%</td>
               </tr>
-
 
             </tbody>
 
@@ -982,21 +641,18 @@
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- INFORMASI SISTEM -->
-    <!-- ================================================= -->
+    <!-- ================= INFORMASI ================= -->
 
     <div class="info">
 
-      <h2>
-        ℹ️ Informasi Sistem
-      </h2>
+      <h2>ℹ️ Informasi Sistem</h2>
 
       <p>
         Sistem ini digunakan untuk memantau perubahan kondisi tanah
-        melalui integrasi parameter statis dan dinamis. Parameter statis
-        menggambarkan kondisi dasar lokasi, sedangkan parameter dinamis
-        digunakan untuk memantau perubahan kondisi secara berkala.
+        melalui integrasi parameter statis dan dinamis.
+        Parameter statis menggambarkan kondisi dasar lokasi,
+        sedangkan parameter dinamis digunakan untuk memantau
+        perubahan kondisi secara berkala.
       </p>
 
       <br>
@@ -1016,11 +672,9 @@
   <!-- ================= FOOTER ================= -->
 
   <footer>
-
     © 2026 Monitoring Pergeseran Tanah
     <br>
     Desa Cikondong - Kecamatan Cineam - Kabupaten Tasikmalaya
-
   </footer>
 
 
