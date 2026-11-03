@@ -4,14 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Monitoring Pergeseran Tanah - Cikondong</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#f2f6f3;color:#222}
-header{background:#14532d;color:#fff;padding:30px 20px;text-align:center}
+header{background:#14532d;color:white;padding:30px 20px;text-align:center}
 header h1{font-size:30px;margin-bottom:8px}
 header p{opacity:.92;font-size:15px;margin-top:5px}
 .container{max-width:1150px;margin:28px auto;padding:0 18px}
-.status,.card,.section-content,.info,.result-card{background:#fff;border-radius:15px;box-shadow:0 4px 15px #0000000d}
+.status,.card,.section-content,.info,.result-card{
+background:white;border-radius:15px;box-shadow:0 4px 15px #0000000d
+}
 .status{text-align:center;padding:24px;margin-bottom:22px}
 .status h2{font-size:17px;color:#555;margin-bottom:9px}
 #statusText{font-size:30px;font-weight:bold;color:#64748b}
@@ -24,20 +27,31 @@ header p{opacity:.92;font-size:15px;margin-top:5px}
 .unit{font-size:13px;color:#777;margin-top:4px}
 .card-note{font-size:12px;color:#777;margin-top:8px}
 .section{margin-top:22px}
-.section-button{width:100%;padding:17px;border:0;border-radius:13px;background:#14532d;color:#fff;font-size:17px;font-weight:bold;text-align:left;cursor:pointer}
+.section-button{
+width:100%;padding:17px;border:0;border-radius:13px;
+background:#14532d;color:white;font-size:17px;
+font-weight:bold;text-align:left;cursor:pointer
+}
 .section-button:hover{background:#166534}
 .section-content{display:none;margin-top:12px;padding:22px}
 .section-content h2,.info h2{color:#14532d;margin-bottom:16px;font-size:21px}
 .parameter-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
-.parameter-card{background:#f2f6f3;border-left:5px solid #14532d;border-radius:11px;padding:16px}
+.parameter-card{
+background:#f2f6f3;border-left:5px solid #14532d;
+border-radius:11px;padding:16px
+}
 .parameter-card h3{color:#14532d;font-size:16px;margin-bottom:8px}
 .parameter-card p{font-size:14px;color:#555;line-height:1.55;margin:4px 0}
-.source{font-size:12px!important;color:#777!important}
-.type{display:inline-block;margin-top:8px;padding:5px 9px;border-radius:20px;background:#dcfce7;color:#166534;font-size:12px;font-weight:bold}
-.static-label{color:#2563eb;font-weight:bold}.dynamic-label{color:#b45309;font-weight:bold}
+.type{
+display:inline-block;margin-top:8px;padding:5px 9px;
+border-radius:20px;background:#dcfce7;color:#166534;
+font-size:12px;font-weight:bold
+}
+.static-label{color:#2563eb;font-weight:bold}
+.dynamic-label{color:#b45309;font-weight:bold}
 .table-container{overflow-x:auto;margin-top:12px}
 table{width:100%;border-collapse:collapse;min-width:850px;font-size:14px}
-th{background:#14532d;color:#fff;padding:11px}
+th{background:#14532d;color:white;padding:11px}
 td{padding:11px;border-bottom:1px solid #ddd;text-align:center}
 tr:nth-child(even){background:#f7faf8}
 .total-row{font-weight:bold;background:#dcfce7!important}
@@ -45,140 +59,260 @@ tr:nth-child(even){background:#f7faf8}
 .info p{color:#555;line-height:1.65;font-size:14px;margin:8px 0}
 .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:14px}
 .result-card{padding:17px;border:1px solid #e5e7eb;box-shadow:none}
-.result-card .k{font-size:13px;color:#666}.result-card .v{font-size:23px;font-weight:bold;color:#14532d;margin-top:7px}
-.calc-note{background:#f8fafc;border-radius:10px;padding:14px;margin-top:14px;color:#475569;font-size:13px;line-height:1.6}
+.result-card .k{font-size:13px;color:#666}
+.result-card .v{font-size:23px;font-weight:bold;color:#14532d;margin-top:7px}
+.calc-note{
+background:#f8fafc;border-radius:10px;padding:14px;
+margin-top:14px;color:#475569;font-size:13px;line-height:1.6
+}
 #connection{font-size:13px;color:#64748b;margin-top:10px}
 #updated{font-size:12px;color:#777;margin-top:5px}
-.badge{display:inline-block;padding:5px 9px;border-radius:20px;font-size:12px;font-weight:bold;background:#e2e8f0;color:#334155}
 footer{text-align:center;padding:25px;color:#777;font-size:13px}
-@media(max-width:700px){header h1{font-size:23px}.cards,.parameter-grid,.result-grid{grid-template-columns:1fr}.section-button{font-size:15px}.value{font-size:26px}}
+@media(max-width:700px){
+header h1{font-size:23px}
+.cards,.parameter-grid,.result-grid{grid-template-columns:1fr}
+.section-button{font-size:15px}
+.value{font-size:26px}
+}
 </style>
 </head>
+
 <body>
+
 <header>
-  <h1>🌱 Monitoring Pergeseran Tanah</h1>
-  <p>Sistem Pemantauan dan Perhitungan Indeks Risiko Gerakan Tanah (IRGT)</p>
-  <p>Desa Cikondong, Kecamatan Cineam, Kabupaten Tasikmalaya</p>
+<h1>🌱 Monitoring Pergeseran Tanah</h1>
+<p>Sistem Pemantauan dan Perhitungan Indeks Risiko Gerakan Tanah (IRGT)</p>
+<p>Desa Cikondong, Kecamatan Cineam, Kabupaten Tasikmalaya</p>
 </header>
 
 <main class="container">
-  <section class="status">
-    <h2>HASIL KLASIFIKASI INDEKS RISIKO GERAKAN TANAH</h2>
-    <div id="statusText">MENUNGGU DATA SENSOR</div>
-    <small id="statusDetail">Perhitungan akan diperbarui setelah data sensor tersedia.</small>
-    <div id="connection">Menghubungkan ke Supabase...</div>
-    <div id="updated"></div>
-  </section>
 
-  <section class="cards">
-    <div class="card">
-      <div class="icon">💧</div><h3>Kadar Air Tanah dari Sensor</h3>
-      <div class="value" id="moisture">--</div><div class="unit" id="moistureUnit">nilai Supabase</div>
-      <div class="card-note">Skor berdasarkan saturation index pada tabel kriteria Word</div>
-    </div>
-    <div class="card">
-      <div class="icon">↔️</div><h3>Laju Pergeseran Horizontal</h3>
-      <div class="value" id="shiftRate">--</div><div class="unit">mm/jam</div>
-      <div class="card-note">Dihitung dari perubahan data pergeseran potensiometer dan waktu pencatatan</div>
-    </div>
-  </section>
+<section class="status">
+<h2>HASIL KLASIFIKASI INDEKS RISIKO GERAKAN TANAH</h2>
+<div id="statusText">MENUNGGU DATA SENSOR</div>
+<small id="statusDetail">Perhitungan akan diperbarui setelah data sensor tersedia.</small>
+<div id="connection">Menghubungkan ke Supabase...</div>
+<div id="updated"></div>
+</section>
 
-  <section class="section">
-    <button class="section-button" onclick="toggleSection('scoreData')">📊 PERHITUNGAN IRGT OTOMATIS</button>
-    <div id="scoreData" class="section-content" style="display:block">
-      <h2>Nilai Parameter, Bobot, dan Hasil Perhitungan</h2>
-      <div class="table-container">
-        <table>
-          <thead><tr><th>No</th><th>Parameter</th><th>Jenis</th><th>Nilai / Kondisi</th><th>Skor</th><th>Bobot</th><th>Bobot × Skor</th></tr></thead>
-          <tbody id="calculationRows"></tbody>
-          <tfoot><tr class="total-row"><td colspan="4">TOTAL NILAI IRGT</td><td>—</td><td>1,0000</td><td id="irgtTotal">Menunggu</td></tr></tfoot>
-        </table>
-      </div>
-      <div class="result-grid">
-        <div class="result-card"><div class="k">Nilai IRGT</div><div class="v" id="irgtValue">--</div></div>
-        <div class="result-card"><div class="k">Kategori</div><div class="v" id="irgtCategory">--</div></div>
-        <div class="result-card"><div class="k">Status</div><div class="v" id="irgtStatus">--</div></div>
-      </div>
-      <div class="calc-note" id="calcExplanation">
-        Perhitungan menggunakan rumus Σ (bobot parameter × skor kondisi). Skor kadar air dan laju pergeseran akan diambil dari kriteria penilaian pada dokumen Word.
-      </div>
-    </div>
-  </section>
+<section class="cards">
 
-  <section class="section">
-    <button class="section-button" onclick="toggleSection('staticData')">🗺️ DATA 5 PARAMETER STATIS</button>
-    <div id="staticData" class="section-content">
-      <h2>Parameter Statis Desa Cikondong</h2>
-      <div class="parameter-grid">
-        <div class="parameter-card"><h3>1. ⛰️ Kemiringan Lereng</h3><p><b>Kondisi:</b> Lereng 4°–24°, dengan bagian mahkota gerakan tanah 13°–28°.</p><p><b>Skor kondisi:</b> 4</p><span class="type">STATIS • TETAP</span></div>
-        <div class="parameter-card"><h3>2. 🪨 Jenis Batuan</h3><p><b>Kondisi:</b> Breksi vulkanik mengalami pelapukan, perubahan, dan deformasi.</p><p><b>Skor kondisi:</b> 5</p><span class="type">STATIS • TETAP</span></div>
-        <div class="parameter-card"><h3>3. 🌱 Jenis Tanah</h3><p><b>Kondisi:</b> Tanah pelapukan bersifat lepas dan mudah runtuh; karakteristik lempung berpasir.</p><p><b>Skor kondisi:</b> 4</p><span class="type">STATIS • TETAP</span></div>
-        <div class="parameter-card"><h3>4. 🌾 Tata Guna Lahan</h3><p><b>Kondisi:</b> Permukiman, kebun, ladang, sawah, dan hutan; terdapat aktivitas/permukiman pada wilayah bergerak.</p><p><b>Skor kondisi:</b> 4</p><span class="type">STATIS • TETAP</span></div>
-        <div class="parameter-card"><h3>5. 💧 Kondisi Drainase</h3><p><b>Kondisi:</b> Aliran permukaan tidak terkendali dan drainase jalan/permukiman belum tertata baik; air dapat masuk melalui rekahan.</p><p><b>Skor kondisi:</b> 5</p><span class="type">STATIS • TETAP</span></div>
-      </div>
-    </div>
-  </section>
+<div class="card">
+<div class="icon">💧</div>
+<h3>Kadar Air Tanah dari Sensor</h3>
+<div class="value" id="moisture">--</div>
+<div class="unit" id="moistureUnit">nilai Supabase</div>
+<div class="card-note">Skor berdasarkan saturation index pada tabel kriteria Word</div>
+</div>
 
-  <section class="section">
-    <button class="section-button" onclick="toggleSection('dynamicData')">📡 DATA 4 PARAMETER DINAMIS</button>
-    <div id="dynamicData" class="section-content">
-      <h2>Parameter Dinamis</h2>
-      <div class="parameter-grid">
-        <div class="parameter-card"><h3>6. 🌧️ Curah Hujan</h3><p><b>Nilai simulasi:</b> 321 mm</p><p><b>Kriteria:</b> 272–392 mm</p><p><b>Skor kondisi:</b> 4</p><span class="type">DINAMIS • NILAI TETAP DARI WORD</span></div>
-        <div class="parameter-card"><h3>7. 💦 Kadar Air Tanah</h3><p><b>Nilai:</b> <span id="moistureDetail">Menunggu data sensor</span></p><p><b>Indikator:</b> Saturation index</p><p><b>Skor kondisi:</b> <span id="moistureScore">Menunggu data</span></p><span class="type">DINAMIS • SENSOR</span></div>
-        <div class="parameter-card"><h3>8. 📐 Tilt Rate</h3><p><b>Nilai simulasi:</b> 0,08°/jam</p><p><b>Kriteria:</b> 0,05–&lt;0,20°/jam</p><p><b>Skor kondisi:</b> 3</p><span class="type">DINAMIS • NILAI TETAP DARI WORD</span></div>
-        <div class="parameter-card"><h3>9. ↔️ Pergeseran Horizontal</h3><p><b>Nilai:</b> <span id="shiftDetail">Menunggu data sensor</span></p><p><b>Indikator:</b> Laju perpindahan (mm/jam)</p><p><b>Skor kondisi:</b> <span id="shiftScore">Menunggu data</span></p><span class="type">DINAMIS • SENSOR</span></div>
-      </div>
-    </div>
-  </section>
+<div class="card">
+<div class="icon">↔️</div>
+<h3>Laju Pergeseran Horizontal</h3>
+<div class="value" id="shiftRate">--</div>
+<div class="unit">mm/jam</div>
+<div class="card-note">Dihitung dari perubahan data pergeseran potensiometer dan waktu pencatatan</div>
+</div>
 
-  <section class="section">
-    <button class="section-button" onclick="toggleSection('criteriaData')">📚 KRITERIA SKOR PARAMETER DINAMIS</button>
-    <div id="criteriaData" class="section-content">
-      <h2>Kriteria Penilaian dari Dokumen Word</h2>
-      <div class="table-container"><table>
-        <thead><tr><th>Parameter</th><th>Skor 1</th><th>Skor 2</th><th>Skor 3</th><th>Skor 4</th><th>Skor 5</th></tr></thead>
-        <tbody>
-          <tr><td>Curah hujan (mm)</td><td>≤59</td><td>60–177</td><td>178–271</td><td>272–392</td><td>&gt;392</td></tr>
-          <tr><td>Saturation index</td><td>&lt;0,50</td><td>0,50–&lt;0,80</td><td>0,80–&lt;1,00</td><td>≥1,00</td><td>≥1,00 + indikasi pergerakan</td></tr>
-          <tr><td>Tilt rate (°/jam)</td><td>&lt;0,005</td><td>0,005–&lt;0,05</td><td>0,05–&lt;0,20</td><td>≥0,20</td><td>≥0,50</td></tr>
-          <tr><td>Pergeseran (mm/jam)</td><td>&lt;0,5</td><td>0,5–&lt;5</td><td>5–&lt;20</td><td>≥20</td><td>≥50</td></tr>
-        </tbody>
-      </table></div>
-      <div class="calc-note"><b>Catatan penting:</b> Dokumen menetapkan skor 4 untuk saturation index ≥1,00 dan skor 5 untuk ≥1,00 disertai indikasi pergerakan. Karena itu, sistem hanya memberi skor 5 jika saturation index ≥1,00 dan laju pergeseran menunjukkan adanya pergerakan. Rentang skor 4 dan 5 pada dokumen saling tumpang tindih; aturan operasional ini digunakan agar keduanya dapat dibedakan.</div>
-    </div>
-  </section>
+</section>
 
-  <section class="section">
-    <button class="section-button" onclick="toggleSection('weightData')">⚖️ BOBOT 9 PARAMETER PENELITIAN</button>
-    <div id="weightData" class="section-content">
-      <h2>Tabel Pembobotan</h2>
-      <p style="color:#555;line-height:1.6">Total skor pembobotan 65 dan total bobot 100%.</p>
-      <div class="table-container"><table>
-        <thead><tr><th>No</th><th>Parameter</th><th>Frekuensi</th><th>Relevansi</th><th>Total skor</th><th>Bobot</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Kemiringan lereng</td><td>5</td><td>4</td><td>9</td><td>13,85%</td></tr>
-          <tr><td>2</td><td>Jenis batuan</td><td>5</td><td>5</td><td>10</td><td>15,38%</td></tr>
-          <tr><td>3</td><td>Jenis tanah</td><td>3</td><td>4</td><td>7</td><td>10,77%</td></tr>
-          <tr><td>4</td><td>Tata guna lahan</td><td>4</td><td>5</td><td>9</td><td>13,85%</td></tr>
-          <tr><td>5</td><td>Kondisi drainase</td><td>2</td><td>3</td><td>5</td><td>7,69%</td></tr>
-          <tr><td>6</td><td>Curah hujan</td><td>4</td><td>3</td><td>7</td><td>10,77%</td></tr>
-          <tr><td>7</td><td>Kadar air tanah</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
-          <tr><td>8</td><td>Tilt rate</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
-          <tr><td>9</td><td>Pergeseran horizontal</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
-        </tbody>
-      </table></div>
-    </div>
-  </section>
+<section class="section">
+<button class="section-button" onclick="toggleSection('scoreData')">📊 PERHITUNGAN IRGT OTOMATIS</button>
 
-  <section class="info">
-    <h2>ℹ️ Informasi Sistem</h2>
-    <p>Lima parameter statis menggunakan skor kondisi tetap dari rekapitulasi penilaian. Curah hujan (321 mm), tilt rate (0,08°/jam), dan skor dasarnya juga mengikuti nilai simulasi pada dokumen Word. Hanya kadar air tanah dan pergeseran horizontal yang mengambil data dari Supabase.</p>
-    <p>IRGT dihitung dengan rumus: <b>IRGT = Σ (bobot × skor kondisi)</b>. Klasifikasi dokumen: 1,00–2,33 Rendah/Aman; 2,34–3,67 Sedang/Siaga; 3,68–5,00 Tinggi/Darurat.</p>
-    <p><b>Catatan sensor:</b> kolom kelembapan di Supabase harus berisi saturation index (0–1 atau persentase 0–100), bukan angka ADC mentah. Laju pergeseran dihitung dari selisih dua catatan nilai potensiometer (diasumsikan satuan kolom pergeseran adalah cm) dibagi selang waktunya. Jika data ESP32 yang tersimpan bukan format tersebut, skor tidak akan dihitung dengan benar.</p>
-  </section>
+<div id="scoreData" class="section-content" style="display:block">
+<h2>Nilai Parameter, Bobot, dan Hasil Perhitungan</h2>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>No</th><th>Parameter</th><th>Jenis</th>
+<th>Nilai / Kondisi</th><th>Skor</th><th>Bobot</th><th>Bobot × Skor</th>
+</tr>
+</thead>
+<tbody id="calculationRows"></tbody>
+<tfoot>
+<tr class="total-row">
+<td colspan="4">TOTAL NILAI IRGT</td>
+<td>—</td><td>1,0000</td>
+<td id="irgtTotal">Menunggu</td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<div class="result-grid">
+<div class="result-card"><div class="k">Nilai IRGT</div><div class="v" id="irgtValue">--</div></div>
+<div class="result-card"><div class="k">Kategori</div><div class="v" id="irgtCategory">--</div></div>
+<div class="result-card"><div class="k">Status</div><div class="v" id="irgtStatus">--</div></div>
+</div>
+
+<div class="calc-note" id="calcExplanation">
+Perhitungan menggunakan rumus Σ (bobot parameter × skor kondisi).
+</div>
+</div>
+</section>
+
+<section class="section">
+<button class="section-button" onclick="toggleSection('staticData')">🗺️ DATA 5 PARAMETER STATIS</button>
+
+<div id="staticData" class="section-content">
+<h2>Parameter Statis Desa Cikondong</h2>
+
+<div class="parameter-grid">
+
+<div class="parameter-card">
+<h3>1. ⛰️ Kemiringan Lereng</h3>
+<p><b>Kondisi:</b> Lereng 4°–24°, dengan bagian mahkota gerakan tanah 13°–28°.</p>
+<p><b>Skor kondisi:</b> 4</p>
+<span class="type">STATIS • TETAP</span>
+</div>
+
+<div class="parameter-card">
+<h3>2. 🪨 Jenis Batuan</h3>
+<p><b>Kondisi:</b> Breksi vulkanik mengalami pelapukan, perubahan, dan deformasi.</p>
+<p><b>Skor kondisi:</b> 5</p>
+<span class="type">STATIS • TETAP</span>
+</div>
+
+<div class="parameter-card">
+<h3>3. 🌱 Jenis Tanah</h3>
+<p><b>Kondisi:</b> Tanah pelapukan bersifat lepas dan mudah runtuh; karakteristik lempung berpasir.</p>
+<p><b>Skor kondisi:</b> 4</p>
+<span class="type">STATIS • TETAP</span>
+</div>
+
+<div class="parameter-card">
+<h3>4. 🌾 Tata Guna Lahan</h3>
+<p><b>Kondisi:</b> Permukiman, kebun, ladang, sawah, dan hutan.</p>
+<p><b>Skor kondisi:</b> 4</p>
+<span class="type">STATIS • TETAP</span>
+</div>
+
+<div class="parameter-card">
+<h3>5. 💧 Kondisi Drainase</h3>
+<p><b>Kondisi:</b> Aliran permukaan tidak terkendali dan drainase belum tertata baik.</p>
+<p><b>Skor kondisi:</b> 5</p>
+<span class="type">STATIS • TETAP</span>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<button class="section-button" onclick="toggleSection('dynamicData')">📡 DATA 4 PARAMETER DINAMIS</button>
+
+<div id="dynamicData" class="section-content">
+<h2>Parameter Dinamis</h2>
+
+<div class="parameter-grid">
+
+<div class="parameter-card">
+<h3>6. 🌧️ Curah Hujan</h3>
+<p><b>Nilai simulasi:</b> 321 mm</p>
+<p><b>Kriteria:</b> 272–392 mm</p>
+<p><b>Skor kondisi:</b> 4</p>
+<span class="type">DINAMIS • NILAI TETAP DARI WORD</span>
+</div>
+
+<div class="parameter-card">
+<h3>7. 💦 Kadar Air Tanah</h3>
+<p><b>Nilai:</b> <span id="moistureDetail">Menunggu data sensor</span></p>
+<p><b>Indikator:</b> Saturation index</p>
+<p><b>Skor kondisi:</b> <span id="moistureScore">Menunggu data</span></p>
+<span class="type">DINAMIS • SENSOR</span>
+</div>
+
+<div class="parameter-card">
+<h3>8. 📐 Tilt Rate</h3>
+<p><b>Nilai simulasi:</b> 0,08°/jam</p>
+<p><b>Kriteria:</b> 0,05–&lt;0,20°/jam</p>
+<p><b>Skor kondisi:</b> 3</p>
+<span class="type">DINAMIS • NILAI TETAP DARI WORD</span>
+</div>
+
+<div class="parameter-card">
+<h3>9. ↔️ Pergeseran Horizontal</h3>
+<p><b>Nilai:</b> <span id="shiftDetail">Menunggu data sensor</span></p>
+<p><b>Indikator:</b> Laju perpindahan (mm/jam)</p>
+<p><b>Skor kondisi:</b> <span id="shiftScore">Menunggu data</span></p>
+<span class="type">DINAMIS • SENSOR</span>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<button class="section-button" onclick="toggleSection('criteriaData')">📚 KRITERIA SKOR PARAMETER DINAMIS</button>
+
+<div id="criteriaData" class="section-content">
+<h2>Kriteria Penilaian dari Dokumen Word</h2>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Parameter</th><th>Skor 1</th><th>Skor 2</th>
+<th>Skor 3</th><th>Skor 4</th><th>Skor 5</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Curah hujan (mm)</td><td>≤59</td><td>60–177</td><td>178–271</td><td>272–392</td><td>&gt;392</td></tr>
+<tr><td>Saturation index</td><td>&lt;0,50</td><td>0,50–&lt;0,80</td><td>0,80–&lt;1,00</td><td>≥1,00</td><td>≥1,00 + indikasi pergerakan</td></tr>
+<tr><td>Tilt rate (°/jam)</td><td>&lt;0,005</td><td>0,005–&lt;0,05</td><td>0,05–&lt;0,20</td><td>≥0,20</td><td>≥0,50</td></tr>
+<tr><td>Pergeseran (mm/jam)</td><td>&lt;0,5</td><td>0,5–&lt;5</td><td>5–&lt;20</td><td>≥20</td><td>≥50</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="calc-note">
+<b>Catatan:</b> Skor 5 untuk kadar air memerlukan saturation index ≥1,00 disertai indikasi pergerakan.
+</div>
+</div>
+</section>
+
+<section class="section">
+<button class="section-button" onclick="toggleSection('weightData')">⚖️ BOBOT 9 PARAMETER PENELITIAN</button>
+
+<div id="weightData" class="section-content">
+<h2>Tabel Pembobotan</h2>
+<p style="color:#555;line-height:1.6">Total skor pembobotan 65 dan total bobot 100%.</p>
+
+<div class="table-container">
+<table>
+<thead>
+<tr><th>No</th><th>Parameter</th><th>Frekuensi</th><th>Relevansi</th><th>Total skor</th><th>Bobot</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Kemiringan lereng</td><td>5</td><td>4</td><td>9</td><td>13,85%</td></tr>
+<tr><td>2</td><td>Jenis batuan</td><td>5</td><td>5</td><td>10</td><td>15,38%</td></tr>
+<tr><td>3</td><td>Jenis tanah</td><td>3</td><td>4</td><td>7</td><td>10,77%</td></tr>
+<tr><td>4</td><td>Tata guna lahan</td><td>4</td><td>5</td><td>9</td><td>13,85%</td></tr>
+<tr><td>5</td><td>Kondisi drainase</td><td>2</td><td>3</td><td>5</td><td>7,69%</td></tr>
+<tr><td>6</td><td>Curah hujan</td><td>4</td><td>3</td><td>7</td><td>10,77%</td></tr>
+<tr><td>7</td><td>Kadar air tanah</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
+<tr><td>8</td><td>Tilt rate</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
+<tr><td>9</td><td>Pergeseran horizontal</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="info">
+<h2>ℹ️ Informasi Sistem</h2>
+<p>Lima parameter statis menggunakan skor kondisi tetap. Curah hujan (321 mm) dan tilt rate (0,08°/jam) menggunakan nilai simulasi dokumen Word. Kadar air tanah dan pergeseran horizontal mengambil data dari Supabase.</p>
+<p>IRGT dihitung dengan rumus: <b>IRGT = Σ (bobot × skor kondisi)</b>. Klasifikasi: 1,00–2,33 Rendah/Aman; 2,34–3,67 Sedang/Siaga; 3,68–5,00 Tinggi/Darurat.</p>
+<p><b>Catatan sensor:</b> kolom kelembapan harus berisi saturation index (0–1 atau persentase 0–100). Laju pergeseran diasumsikan dihitung dari perubahan nilai pergeseran dalam cm.</p>
+</section>
+
 </main>
-<footer>© 2026 Monitoring Pergeseran Tanah<br>Desa Cikondong – Kecamatan Cineam – Kabupaten Tasikmalaya</footer>
+
+<footer>
+© 2026 Monitoring Pergeseran Tanah<br>
+Desa Cikondong – Kecamatan Cineam – Kabupaten Tasikmalaya
+</footer>
 
 <script>
 const SUPABASE_URL = "https://tfqabpqniggaofcfghxv.supabase.co";
@@ -186,142 +320,247 @@ const SUPABASE_KEY = "sb_publishable_4L6_KdSHXvYSDN1yKuBbZQ_4LEVsDUz";
 const TABLE_URL = SUPABASE_URL + "/rest/v1/Sensor%20Data";
 const POLL_INTERVAL_MS = 2000;
 
-// Bobot dan skor kondisi tetap mengikuti dokumen Word.
+// Menyimpan nilai terakhir yang valid selama halaman terbuka.
+let lastValidMoisture = null;
+let lastValidShift = null;
+let lastValidShiftRate = null;
+
 const parameters = [
-  {name:"Kemiringan lereng",type:"Statis",value:"4°–24°; mahkota 13°–28°",score:4,weight:0.1385},
-  {name:"Jenis batuan",type:"Statis",value:"Breksi vulkanik lapuk dan terdeformasi",score:5,weight:0.1538},
-  {name:"Jenis tanah",type:"Statis",value:"Tanah pelapukan lepas; lempung berpasir",score:4,weight:0.1077},
-  {name:"Tata guna lahan",type:"Statis",value:"Permukiman, kebun, ladang, sawah, hutan",score:4,weight:0.1385},
-  {name:"Kondisi drainase",type:"Statis",value:"Aliran permukaan tidak terkendali; air masuk rekahan",score:5,weight:0.0769},
-  {name:"Curah hujan",type:"Dinamis tetap",value:"321 mm",score:4,weight:0.1077},
-  {name:"Kadar air tanah",type:"Dinamis sensor",value:"Menunggu sensor",score:null,weight:0.0923},
-  {name:"Tilt rate",type:"Dinamis tetap",value:"0,08°/jam",score:3,weight:0.0923},
-  {name:"Pergeseran horizontal",type:"Dinamis sensor",value:"Menunggu sensor",score:null,weight:0.0923}
+{name:"Kemiringan lereng",type:"Statis",value:"4°–24°; mahkota 13°–28°",score:4,weight:0.1385},
+{name:"Jenis batuan",type:"Statis",value:"Breksi vulkanik lapuk dan terdeformasi",score:5,weight:0.1538},
+{name:"Jenis tanah",type:"Statis",value:"Tanah pelapukan lepas; lempung berpasir",score:4,weight:0.1077},
+{name:"Tata guna lahan",type:"Statis",value:"Permukiman, kebun, ladang, sawah, hutan",score:4,weight:0.1385},
+{name:"Kondisi drainase",type:"Statis",value:"Aliran permukaan tidak terkendali; air masuk rekahan",score:5,weight:0.0769},
+{name:"Curah hujan",type:"Dinamis tetap",value:"321 mm",score:4,weight:0.1077},
+{name:"Kadar air tanah",type:"Dinamis sensor",value:"Menunggu sensor",score:null,weight:0.0923},
+{name:"Tilt rate",type:"Dinamis tetap",value:"0,08°/jam",score:3,weight:0.0923},
+{name:"Pergeseran horizontal",type:"Dinamis sensor",value:"Menunggu sensor",score:null,weight:0.0923}
 ];
 
 function toggleSection(id){
-  const el=document.getElementById(id);
-  el.style.display=el.style.display==="block"?"none":"block";
+const el=document.getElementById(id);
+el.style.display=el.style.display==="block"?"none":"block";
 }
-function fmt(n,d=4){return Number(n).toLocaleString("id-ID",{minimumFractionDigits:d,maximumFractionDigits:d});}
+
+function fmt(n,d=4){
+return Number(n).toLocaleString("id-ID",{
+minimumFractionDigits:d,maximumFractionDigits:d
+});
+}
+
 function setConnection(message,color="#64748b"){
-  const el=document.getElementById("connection");el.textContent=message;el.style.color=color;
+const el=document.getElementById("connection");
+el.textContent=message;
+el.style.color=color;
 }
-function scoreMoisture(raw, movementDetected){
-  if(raw===null||raw===undefined||raw==="") return {score:null,display:"Tidak ada data"};
-  let value=Number(raw);
-  if(!Number.isFinite(value)) return {score:null,display:"Data tidak valid"};
-  // Terima saturation index 0–1 atau persentase 0–100.
-  if(value>1 && value<=100) value=value/100;
-  if(value<0||value>1) return {score:null,display:"Format belum sesuai (perlu saturation index 0–1)"};
-  let score;
-  if(value<0.50) score=1;
-  else if(value<0.80) score=2;
-  else if(value<1.00) score=3;
-  else score=movementDetected?5:4;
-  return {score,display:fmt(value,3),value};
+
+function scoreMoisture(raw,movementDetected){
+if(raw===null||raw===undefined||raw===""){
+return {score:null,display:"Tidak ada data"};
 }
+
+let value=Number(raw);
+if(!Number.isFinite(value)){
+return {score:null,display:"Data tidak valid"};
+}
+
+// Menerima saturation index 0–1 atau persentase 0–100.
+if(value>1&&value<=100)value=value/100;
+
+if(value<0||value>1){
+return {score:null,display:"Format belum sesuai"};
+}
+
+let score;
+if(value<0.50)score=1;
+else if(value<0.80)score=2;
+else if(value<1.00)score=3;
+else score=movementDetected?5:4;
+
+return {score,display:fmt(value,3),value};
+}
+
 function scoreShift(rate){
-  if(rate===null||!Number.isFinite(rate)||rate<0) return null;
-  if(rate<0.5) return 1;
-  if(rate<5) return 2;
-  if(rate<20) return 3;
-  if(rate>=50) return 5;
-  return 4; // 20 sampai <50 mm/jam
+if(rate===null||!Number.isFinite(rate)||rate<0)return null;
+if(rate<0.5)return 1;
+if(rate<5)return 2;
+if(rate<20)return 3;
+if(rate>=50)return 5;
+return 4;
 }
+
 function classifyIRGT(value){
-  if(value<=2.33) return {category:"Rendah",status:"AMAN",color:"#16a34a"};
-  if(value<=3.67) return {category:"Sedang",status:"SIAGA",color:"#d97706"};
-  return {category:"Tinggi",status:"DARURAT",color:"#dc2626"};
+if(value<=2.33)return {category:"Rendah",status:"AMAN",color:"#16a34a"};
+if(value<=3.67)return {category:"Sedang",status:"SIAGA",color:"#d97706"};
+return {category:"Tinggi",status:"DARURAT",color:"#dc2626"};
 }
+
 function renderTable(){
-  const body=document.getElementById("calculationRows");
-  body.innerHTML=parameters.map((p,i)=>{
-    const product=p.score===null?null:p.weight*p.score;
-    return `<tr>
-      <td>${i+1}</td><td>${p.name}</td>
-      <td class="${p.type.includes("Statis")?"static-label":"dynamic-label"}">${p.type}</td>
-      <td>${p.value}</td><td>${p.score===null?"—":p.score}</td>
-      <td>${fmt(p.weight,4)}</td><td>${product===null?"Menunggu":fmt(product,4)}</td>
-    </tr>`;
-  }).join("");
-}
-function updateCalculation(moistureResult, shiftRate){
-  const moistureScore=moistureResult.score;
-  const shiftScore=scoreShift(shiftRate);
-  parameters[6].score=moistureScore;
-  parameters[6].value=moistureResult.display;
-  parameters[8].score=shiftScore;
-  parameters[8].value=shiftRate===null?"Menunggu data laju":fmt(shiftRate,2)+" mm/jam";
-  document.getElementById("moistureScore").textContent=moistureScore??"Belum dapat dinilai";
-  document.getElementById("shiftScore").textContent=shiftScore??"Menunggu data laju";
-  document.getElementById("moistureDetail").textContent=moistureResult.display;
-  document.getElementById("shiftDetail").textContent=shiftRate===null?"Menunggu dua data sensor berbeda waktu":fmt(shiftRate,2)+" mm/jam";
-  document.getElementById("shiftRate").textContent=shiftRate===null?"--":fmt(shiftRate,2);
-  renderTable();
+const body=document.getElementById("calculationRows");
 
-  const ready=parameters.every(p=>p.score!==null);
-  if(!ready){
-    document.getElementById("statusText").textContent="DATA BELUM LENGKAP";
-    document.getElementById("statusText").style.color="#64748b";
-    document.getElementById("statusDetail").textContent="IRGT belum dihitung karena skor sensor belum lengkap atau format kadar air belum sesuai.";
-    document.getElementById("irgtValue").textContent="--";
-    document.getElementById("irgtCategory").textContent="--";
-    document.getElementById("irgtStatus").textContent="--";
-    document.getElementById("irgtTotal").textContent="Menunggu";
-    document.getElementById("calcExplanation").textContent="Skor kadar air harus berupa saturation index (0–1 atau 0–100%). Skor pergeseran memerlukan dua catatan sensor dengan waktu berbeda agar laju mm/jam dapat dihitung.";
-    return;
-  }
-  const total=parameters.reduce((sum,p)=>sum+p.weight*p.score,0);
-  const cls=classifyIRGT(total);
-  document.getElementById("irgtTotal").textContent=fmt(total,4);
-  document.getElementById("irgtValue").textContent=fmt(total,4);
-  document.getElementById("irgtCategory").textContent=cls.category;
-  document.getElementById("irgtStatus").textContent=cls.status;
-  document.getElementById("statusText").textContent=cls.status;
-  document.getElementById("statusText").style.color=cls.color;
-  document.getElementById("statusDetail").textContent="Kategori "+cls.category+" dengan nilai IRGT "+fmt(total,4)+".";
-  document.getElementById("calcExplanation").textContent="IRGT = Σ (bobot × skor kondisi). Nilai dihitung dari 9 parameter; curah hujan 321 mm (skor 4) dan tilt rate 0,08°/jam (skor 3) menggunakan nilai tetap dokumen Word.";
+body.innerHTML=parameters.map((p,i)=>{
+const product=p.score===null?null:p.weight*p.score;
+
+return `<tr>
+<td>${i+1}</td>
+<td>${p.name}</td>
+<td class="${p.type.includes("Statis")?"static-label":"dynamic-label"}">${p.type}</td>
+<td>${p.value}</td>
+<td>${p.score===null?"—":p.score}</td>
+<td>${fmt(p.weight,4)}</td>
+<td>${product===null?"Menunggu":fmt(product,4)}</td>
+</tr>`;
+}).join("");
 }
+
+function updateCalculation(moistureResult,shiftRate){
+const moistureScore=moistureResult.score;
+const shiftScore=scoreShift(shiftRate);
+
+parameters[6].score=moistureScore;
+parameters[6].value=moistureResult.display;
+parameters[8].score=shiftScore;
+parameters[8].value=shiftRate===null?"Menunggu data laju":fmt(shiftRate,2)+" mm/jam";
+
+document.getElementById("moistureScore").textContent=moistureScore??"Belum dapat dinilai";
+document.getElementById("shiftScore").textContent=shiftScore??"Menunggu data laju";
+document.getElementById("moistureDetail").textContent=moistureResult.display;
+document.getElementById("shiftDetail").textContent=shiftRate===null?"Menunggu dua data sensor berbeda waktu":fmt(shiftRate,2)+" mm/jam";
+
+document.getElementById("shiftRate").textContent=
+shiftRate===null?"--":fmt(shiftRate,2);
+
+document.getElementById("moisture").textContent=
+lastValidMoisture===null?"--":fmt(lastValidMoisture,3);
+
+renderTable();
+
+const ready=parameters.every(p=>p.score!==null);
+
+if(!ready){
+document.getElementById("statusText").textContent="DATA BELUM LENGKAP";
+document.getElementById("statusText").style.color="#64748b";
+document.getElementById("statusDetail").textContent="Menunggu data sensor valid.";
+document.getElementById("irgtValue").textContent="--";
+document.getElementById("irgtCategory").textContent="--";
+document.getElementById("irgtStatus").textContent="--";
+document.getElementById("irgtTotal").textContent="Menunggu";
+document.getElementById("calcExplanation").textContent="Perhitungan menunggu data sensor yang valid.";
+return;
+}
+
+const total=parameters.reduce((sum,p)=>sum+p.weight*p.score,0);
+const cls=classifyIRGT(total);
+
+document.getElementById("irgtTotal").textContent=fmt(total,4);
+document.getElementById("irgtValue").textContent=fmt(total,4);
+document.getElementById("irgtCategory").textContent=cls.category;
+document.getElementById("irgtStatus").textContent=cls.status;
+document.getElementById("statusText").textContent=cls.status;
+document.getElementById("statusText").style.color=cls.color;
+document.getElementById("statusDetail").textContent="Kategori "+cls.category+" dengan nilai IRGT "+fmt(total,4)+".";
+document.getElementById("calcExplanation").textContent="IRGT = Σ (bobot × skor kondisi). Perhitungan menggunakan 9 parameter.";
+}
+
 async function getLatestData(){
-  try{
-    const url=TABLE_URL+"?select=pergeseran,kelembapan,created_at&order=created_at.desc&limit=2";
-    const response=await fetch(url,{headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY}});
-    if(!response.ok) throw new Error("HTTP "+response.status+" — periksa koneksi dan kebijakan SELECT Supabase");
-    const rows=await response.json();
-    if(!rows.length){setConnection("Terhubung, tetapi belum ada data sensor.","#b45309");return;}
-    const latest=rows[0];
-    const moistureRaw=latest.kelembapan;
-    document.getElementById("moisture").textContent=moistureRaw==null?"--":fmt(Number(moistureRaw),Number(moistureRaw)>1?0:3);
-    document.getElementById("moistureUnit").textContent=Number(moistureRaw)>1?"nilai tersimpan (cek format)":"saturation index (atau fraksi)";
-    const currentShift=Number(latest.pergeseran);
-    document.getElementById("shiftRate").textContent="--";
+try{
+const url=TABLE_URL+
+"?select=pergeseran,kelembapan,created_at"+
+"&order=created_at.desc&limit=20";
 
-    let rate=null;
-    if(rows.length>=2){
-      const previous=rows[1];
-      const t1=new Date(latest.created_at).getTime();
-      const t0=new Date(previous.created_at).getTime();
-      const elapsedHours=(t1-t0)/3600000;
-      const oldShift=Number(previous.pergeseran);
-      if(Number.isFinite(currentShift)&&Number.isFinite(oldShift)&&elapsedHours>0){
-        // Kolom pergeseran diasumsikan dalam cm; dikonversi menjadi mm/jam.
-        rate=Math.abs(currentShift-oldShift)*10/elapsedHours;
-      }
-    }
-    const movementDetected=rate!==null && rate>=0.5;
-    const moistureResult=scoreMoisture(moistureRaw,movementDetected);
-    updateCalculation(moistureResult,rate);
-    setConnection("Terhubung ke Supabase • data sensor berhasil dibaca","#16a34a");
-    document.getElementById("updated").textContent="Pembaruan data: "+new Date(latest.created_at).toLocaleString("id-ID");
-  }catch(error){
-    console.error(error);
-    setConnection("Gagal membaca Supabase: "+error.message,"#dc2626");
-  }
+const response=await fetch(url,{
+headers:{
+"apikey":SUPABASE_KEY,
+"Authorization":"Bearer "+SUPABASE_KEY
 }
+});
+
+if(!response.ok){
+throw new Error("HTTP "+response.status);
+}
+
+const rows=await response.json();
+
+if(!rows.length){
+setConnection("Terhubung, tetapi belum ada data sensor.","#b45309");
+return;
+}
+
+// Cari kelembapan terakhir yang valid dan bukan nol.
+const moistureRow=rows.find(row=>
+row.kelembapan!==null&&
+row.kelembapan!==""&&
+Number.isFinite(Number(row.kelembapan))&&
+Number(row.kelembapan)>0
+);
+
+if(moistureRow){
+lastValidMoisture=Number(moistureRow.kelembapan);
+}
+
+// Cari dua data pergeseran terakhir yang valid.
+// Nilai nol diabaikan sesuai permintaan mempertahankan angka terakhir.
+const shiftRows=rows.filter(row=>
+row.pergeseran!==null&&
+row.pergeseran!==""&&
+Number.isFinite(Number(row.pergeseran))&&
+Number(row.pergeseran)>0
+).slice(0,2);
+
+let rate=lastValidShiftRate;
+
+if(shiftRows.length>=2){
+const latest=shiftRows[0];
+const previous=shiftRows[1];
+
+const t1=new Date(latest.created_at).getTime();
+const t0=new Date(previous.created_at).getTime();
+const elapsedHours=(t1-t0)/3600000;
+
+const currentShift=Number(latest.pergeseran);
+const oldShift=Number(previous.pergeseran);
+
+if(elapsedHours>0){
+rate=Math.abs(currentShift-oldShift)*10/elapsedHours;
+lastValidShiftRate=rate;
+}
+
+lastValidShift=currentShift;
+}
+
+// Gunakan nilai terakhir yang tersimpan.
+const movementDetected=rate!==null&&rate>=0.5;
+
+const moistureResult=lastValidMoisture===null
+?{score:null,display:"Menunggu data valid"}
+:scoreMoisture(lastValidMoisture,movementDetected);
+
+updateCalculation(moistureResult,rate);
+
+document.getElementById("moistureUnit").textContent=
+"nilai valid terakhir dari Supabase";
+
+setConnection(
+"Terhubung ke Supabase • data valid terakhir dipertahankan",
+"#16a34a"
+);
+
+document.getElementById("updated").textContent=
+"Pemeriksaan terakhir: "+new Date().toLocaleString("id-ID");
+
+}catch(error){
+console.error(error);
+setConnection(
+"Koneksi terganggu • menampilkan data terakhir",
+"#b45309"
+);
+}
+}
+
 renderTable();
 getLatestData();
 setInterval(getLatestData,POLL_INTERVAL_MS);
 </script>
+
 </body>
 </html>
