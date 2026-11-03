@@ -1,652 +1,910 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Monitoring Pergeseran Tanah - Cikondong</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitoring Pergeseran Tanah - Cikondong</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
-    body {
-      background: #f2f6f3;
-      color: #222;
-    }
+body {
+  background: #f2f6f3;
+  color: #222;
+}
 
-    header {
-      background: #14532d;
-      color: white;
-      padding: 30px 20px;
-      text-align: center;
-    }
+header {
+  background: #14532d;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
 
-    header h1 {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
+header h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
 
-    header p {
-      opacity: 0.9;
-      font-size: 16px;
-      margin-top: 4px;
-    }
+header p {
+  margin-top: 5px;
+  font-size: 14px;
+}
 
-    .container {
-      max-width: 1100px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
+.container {
+  max-width: 1150px;
+  margin: 28px auto;
+  padding: 0 18px;
+}
 
-    .status {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      text-align: center;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+.status, .card, .section-content, .info {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px #0000000d;
+}
 
-    .status h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: #555;
-    }
+.status {
+  text-align: center;
+  padding: 24px;
+  margin-bottom: 22px;
+}
 
-    #statusText {
-      font-size: 32px;
-      font-weight: bold;
-      color: #16a34a;
-    }
+.status h2 {
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 10px;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
+#statusText {
+  font-size: 30px;
+  font-weight: bold;
+  color: #64748b;
+}
 
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+#statusDetail {
+  color: #777;
+  margin-top: 8px;
+}
 
-    .icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
+#connection, #updated {
+  font-size: 12px;
+  margin-top: 8px;
+  color: #64748b;
+}
 
-    .card h3 {
-      color: #555;
-      margin-bottom: 10px;
-    }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
 
-    .value {
-      font-size: 30px;
-      font-weight: bold;
-      color: #14532d;
-    }
+.card {
+  text-align: center;
+  padding: 22px;
+}
 
-    .unit {
-      color: #777;
-    }
+.icon {
+  font-size: 35px;
+  margin-bottom: 8px;
+}
 
-    .section {
-      margin-top: 25px;
-    }
+.card h3 {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
 
-    .section-button {
-      width: 100%;
-      padding: 18px;
-      border: none;
-      border-radius: 15px;
-      background: #14532d;
-      color: white;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      text-align: left;
-    }
+.value {
+  font-size: 29px;
+  font-weight: bold;
+  color: #14532d;
+}
 
-    .section-button:hover {
-      background: #166534;
-    }
+.unit, .card-note {
+  font-size: 12px;
+  color: #777;
+  margin-top: 7px;
+}
 
-    .section-content {
-      display: none;
-      background: white;
-      margin-top: 15px;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+.section {
+  margin-top: 22px;
+}
 
-    .section-content h2 {
-      color: #14532d;
-      margin-bottom: 20px;
-    }
+.section-button {
+  width: 100%;
+  padding: 17px;
+  border: none;
+  border-radius: 13px;
+  background: #14532d;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+}
 
-    .parameter-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
+.section-button:hover {
+  background: #166534;
+}
 
-    .parameter-card {
-      background: #f2f6f3;
-      border-radius: 12px;
-      padding: 18px;
-      border-left: 5px solid #14532d;
-    }
+.section-content {
+  display: none;
+  margin-top: 12px;
+  padding: 22px;
+}
 
-    .parameter-card h3 {
-      color: #14532d;
-      margin-bottom: 10px;
-    }
+.section-content h2, .info h2 {
+  color: #14532d;
+  margin-bottom: 16px;
+  font-size: 21px;
+}
 
-    .parameter-card p {
-      color: #555;
-      line-height: 1.5;
-      margin-bottom: 6px;
-    }
+.parameter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
 
-    .source {
-      font-size: 13px;
-      color: #777;
-      margin-top: 8px;
-    }
+.parameter-card {
+  background: #f2f6f3;
+  border-left: 5px solid #14532d;
+  border-radius: 11px;
+  padding: 16px;
+}
 
-    .parameter-card .type {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 5px 10px;
-      border-radius: 20px;
-      background: #dcfce7;
-      color: #166534;
-      font-size: 13px;
-      font-weight: bold;
-    }
+.parameter-card h3 {
+  color: #14532d;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
 
-    .table-container {
-      overflow-x: auto;
-    }
+.parameter-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.55;
+  margin: 4px 0;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 750px;
-    }
+.type {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #dcfce7;
+  color: #166534;
+  font-size: 12px;
+  font-weight: bold;
+}
 
-    th {
-      background: #14532d;
-      color: white;
-      padding: 12px;
-      text-align: center;
-    }
+.table-container {
+  overflow-x: auto;
+  margin-top: 12px;
+}
 
-    td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-    }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+  font-size: 14px;
+}
 
-    tr:nth-child(even) {
-      background: #f7faf8;
-    }
+th {
+  background: #14532d;
+  color: white;
+  padding: 11px;
+}
 
-    tr:hover {
-      background: #ecfdf5;
-    }
+td {
+  padding: 11px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
 
-    .static-label {
-      color: #2563eb;
-      font-weight: bold;
-    }
+tr:nth-child(even) {
+  background: #f7faf8;
+}
 
-    .dynamic-label {
-      color: #d97706;
-      font-weight: bold;
-    }
+.total-row {
+  font-weight: bold;
+  background: #dcfce7 !important;
+}
 
-    .total-row {
-      font-weight: bold;
-      background: #dcfce7 !important;
-    }
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+  margin-top: 14px;
+}
 
-    .info {
-      background: white;
-      margin-top: 25px;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+.result-card {
+  padding: 17px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
 
-    .info h2 {
-      margin-bottom: 15px;
-      color: #14532d;
-    }
+.result-card .k {
+  font-size: 13px;
+  color: #666;
+}
 
-    .info p {
-      line-height: 1.7;
-      color: #555;
-    }
+.result-card .v {
+  font-size: 23px;
+  font-weight: bold;
+  color: #14532d;
+  margin-top: 7px;
+}
 
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #777;
-      margin-top: 20px;
-    }
+.calc-note {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 14px;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.6;
+}
 
-    @media (max-width: 700px) {
-      header h1 {
-        font-size: 24px;
-      }
+.info {
+  margin-top: 22px;
+  padding: 22px;
+}
 
-      .cards {
-        grid-template-columns: 1fr;
-      }
+.info p {
+  color: #555;
+  line-height: 1.65;
+  font-size: 14px;
+  margin: 8px 0;
+}
 
-      .parameter-grid {
-        grid-template-columns: 1fr;
-      }
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #777;
+  font-size: 13px;
+}
 
-      .section-button {
-        font-size: 16px;
-      }
-    }
-  </style>
+@media(max-width:700px) {
+  header h1 {
+    font-size: 23px;
+  }
+
+  .cards, .parameter-grid, .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .value {
+    font-size: 26px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🌱 Monitoring Pergeseran Tanah</h1>
-    <p>Sistem Pemantauan Kondisi Tanah Berbasis ESP32</p>
-    <p>Desa Cikondong, Kecamatan Cineam, Kabupaten Tasikmalaya</p>
-  </header>
+<header>
+  <h1>🌱 Monitoring Pergeseran Tanah</h1>
+  <p>Sistem Pemantauan dan Perhitungan Indeks Risiko Gerakan Tanah (IRGT)</p>
+  <p>Desa Cikondong, Kecamatan Cineam, Kabupaten Tasikmalaya</p>
+</header>
 
-  <div class="container">
+<main class="container">
 
-    <div class="status">
-      <h2>STATUS KONDISI TANAH</h2>
-      <div id="statusText">MEMUAT...</div>
+  <section class="status">
+    <h2>HASIL KLASIFIKASI INDEKS RISIKO GERAKAN TANAH</h2>
+    <div id="statusText">MENUNGGU DATA SENSOR</div>
+    <div id="statusDetail">Perhitungan akan diperbarui setelah data sensor tersedia.</div>
+    <div id="connection">Menghubungkan ke Supabase...</div>
+    <div id="updated"></div>
+  </section>
+
+  <section class="cards">
+
+    <div class="card">
+      <div class="icon">💧</div>
+      <h3>Kadar Air Tanah dari Sensor</h3>
+      <div class="value" id="moisture">--</div>
+      <div class="unit">Saturation Index</div>
+      <div class="card-note">Data sensor melalui Supabase</div>
     </div>
 
-    <div class="cards">
-
-      <div class="card">
-        <div class="icon">💧</div>
-        <h3>Kelembapan</h3>
-        <div class="value" id="moisture">--</div>
-        <div class="unit">%</div>
-      </div>
-
-      <div class="card">
-        <div class="icon">↔️</div>
-        <h3>Pergeseran</h3>
-        <div class="value" id="shift">--</div>
-        <div class="unit">cm</div>
-      </div>
-
-      <div class="card">
-        <div class="icon">📐</div>
-        <h3>Tilt Rate</h3>
-        <div class="value" id="tilt">--</div>
-        <div class="unit">°</div>
-      </div>
-
+    <div class="card">
+      <div class="icon">↔️</div>
+      <h3>Laju Pergeseran Horizontal</h3>
+      <div class="value" id="shiftRate">--</div>
+      <div class="unit">mm/jam</div>
+      <div class="card-note">Data sensor melalui Supabase</div>
     </div>
 
-    <!-- DATA STATIS -->
-    <div class="section">
-      <button class="section-button" onclick="toggleSection('staticData')">
-        🗺️ DATA STATIS CIKONDONG
-      </button>
+  </section>
 
-      <div id="staticData" class="section-content">
-        <h2>5 Parameter Statis</h2>
+  <section class="section">
+    <button class="section-button" onclick="toggleSection('scoreData')">
+      📊 PERHITUNGAN IRGT OTOMATIS
+    </button>
 
-        <div class="parameter-grid">
+    <div id="scoreData" class="section-content" style="display:block">
 
-          <div class="parameter-card">
-            <h3>1. ⛰️ Kemiringan Lereng</h3>
-            <p><strong>Kondisi:</strong> 4°–24°, bagian mahkota 13°–28°</p>
-            <p class="source">Sumber: Badan Geologi (2025)</p>
-            <span class="type">STATIS</span>
-          </div>
+      <h2>Nilai Parameter, Bobot, dan Hasil Perhitungan</h2>
 
-          <div class="parameter-card">
-            <h3>2. 🪨 Jenis Batuan</h3>
-            <p><strong>Kondisi:</strong> Breksi vulkanik yang mengalami pelapukan dan deformasi</p>
-            <p class="source">Sumber: Badan Geologi (2025)</p>
-            <span class="type">STATIS</span>
-          </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Parameter</th>
+              <th>Jenis</th>
+              <th>Nilai / Kondisi</th>
+              <th>Skor</th>
+              <th>Bobot</th>
+              <th>Bobot × Skor</th>
+            </tr>
+          </thead>
 
-          <div class="parameter-card">
-            <h3>3. 🌱 Jenis Tanah</h3>
-            <p><strong>Kondisi:</strong> Berdasarkan data/peta jenis tanah Cikondong</p>
-            <p class="source">Sumber: Data sekunder</p>
-            <span class="type">STATIS</span>
-          </div>
+          <tbody id="calculationRows"></tbody>
 
-          <div class="parameter-card">
-            <h3>4. 🌾 Tata Guna Lahan</h3>
-            <p><strong>Kondisi:</strong> Permukiman, kebun, ladang, sawah, dan hutan</p>
-            <p class="source">Sumber: Data sekunder</p>
-            <span class="type">STATIS</span>
-          </div>
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="4">TOTAL NILAI IRGT</td>
+              <td>—</td>
+              <td>1,0000</td>
+              <td id="irgtTotal">Menunggu</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
 
-          <div class="parameter-card">
-            <h3>5. 💧 Kondisi Drainase</h3>
-            <p><strong>Kondisi:</strong> Aliran permukaan tidak terkendali dan infiltrasi melalui rekahan</p>
-            <p class="source">Sumber: Badan Geologi (2025)</p>
-            <span class="type">STATIS</span>
-          </div>
+      <div class="result-grid">
 
+        <div class="result-card">
+          <div class="k">Nilai IRGT</div>
+          <div class="v" id="irgtValue">--</div>
         </div>
-      </div>
-    </div>
 
-    <!-- DATA DINAMIS -->
-    <div class="section">
-      <button class="section-button" onclick="toggleSection('dynamicData')">
-        📡 DATA DINAMIS / REAL-TIME
-      </button>
-
-      <div id="dynamicData" class="section-content">
-        <h2>4 Parameter Dinamis</h2>
-
-        <div class="parameter-grid">
-
-          <div class="parameter-card">
-            <h3>6. 🌧️ Curah Hujan</h3>
-            <p><strong>Dasar data:</strong> Data curah hujan 2016–2025</p>
-            <p class="source">Sumber: Data sekunder</p>
-            <span class="type">DINAMIS</span>
-          </div>
-
-          <div class="parameter-card">
-            <h3>7. 💦 Kadar Air Tanah / Kejenuhan</h3>
-            <p><strong>Dasar data:</strong> Berdasarkan kondisi infiltrasi dan hujan</p>
-            <p class="source">Sumber: Literatur/laporan</p>
-            <span class="type">DINAMIS</span>
-          </div>
-
-          <div class="parameter-card">
-            <h3>8. 📐 Tilt Rate</h3>
-            <p><strong>Dasar data:</strong> Perubahan kemiringan yang direpresentasikan oleh MPU6050</p>
-            <p class="source">Sumber: Prototype</p>
-            <span class="type">DINAMIS</span>
-          </div>
-
-          <div class="parameter-card">
-            <h3>9. ↔️ Pergeseran Horizontal</h3>
-            <p><strong>Dasar data:</strong> Perubahan posisi horizontal yang direpresentasikan melalui potensiometer</p>
-            <p class="source">Sumber: Prototype</p>
-            <span class="type">DINAMIS</span>
-          </div>
-
+        <div class="result-card">
+          <div class="k">Kategori</div>
+          <div class="v" id="irgtCategory">--</div>
         </div>
-      </div>
-    </div>
 
-    <!-- BOBOT -->
-    <div class="section">
-      <button class="section-button" onclick="toggleSection('weightData')">
-        📊 BOBOT 9 PARAMETER PENELITIAN
-      </button>
-
-      <div id="weightData" class="section-content">
-        <h2>Pembobotan 9 Parameter</h2>
-
-        <p style="margin-bottom:20px; color:#555; line-height:1.6;">
-          Total skor seluruh parameter adalah 65 dengan total bobot 100%.
-        </p>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Parameter</th>
-                <th>Jenis</th>
-                <th>Skor<br>Frekuensi</th>
-                <th>Skor<br>Relevansi</th>
-                <th>Total<br>Skor</th>
-                <th>Bobot</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Kemiringan Lereng</td>
-                <td class="static-label">Statis</td>
-                <td>5</td><td>4</td><td>9</td><td>13,85%</td>
-              </tr>
-
-              <tr>
-                <td>2</td>
-                <td>Jenis Batuan</td>
-                <td class="static-label">Statis</td>
-                <td>5</td><td>5</td><td>10</td><td>15,38%</td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Jenis Tanah</td>
-                <td class="static-label">Statis</td>
-                <td>3</td><td>4</td><td>7</td><td>10,77%</td>
-              </tr>
-
-              <tr>
-                <td>4</td>
-                <td>Tata Guna Lahan</td>
-                <td class="static-label">Statis</td>
-                <td>4</td><td>5</td><td>9</td><td>13,85%</td>
-              </tr>
-
-              <tr>
-                <td>5</td>
-                <td>Kondisi Drainase</td>
-                <td class="static-label">Statis</td>
-                <td>2</td><td>3</td><td>5</td><td>7,69%</td>
-              </tr>
-
-              <tr>
-                <td>6</td>
-                <td>Curah Hujan</td>
-                <td class="dynamic-label">Dinamis</td>
-                <td>4</td><td>3</td><td>7</td><td>10,77%</td>
-              </tr>
-
-              <tr>
-                <td>7</td>
-                <td>Kadar Air Tanah/Kejenuhan</td>
-                <td class="dynamic-label">Dinamis</td>
-                <td>1</td><td>5</td><td>6</td><td>9,23%</td>
-              </tr>
-
-              <tr>
-                <td>8</td>
-                <td>Tilt Rate</td>
-                <td class="dynamic-label">Dinamis</td>
-                <td>1</td><td>5</td><td>6</td><td>9,23%</td>
-              </tr>
-
-              <tr>
-                <td>9</td>
-                <td>Pergeseran Horizontal</td>
-                <td class="dynamic-label">Dinamis</td>
-                <td>1</td><td>5</td><td>6</td><td>9,23%</td>
-              </tr>
-
-              <tr class="total-row">
-                <td colspan="5">TOTAL</td>
-                <td>65</td>
-                <td>100%</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="result-card">
+          <div class="k">Status</div>
+          <div class="v" id="irgtStatus">--</div>
         </div>
+
+      </div>
+
+      <div class="calc-note" id="calcExplanation">
+        IRGT dihitung menggunakan rumus Σ (bobot × skor kondisi).
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <button class="section-button" onclick="toggleSection('staticData')">
+      🗺️ DATA 5 PARAMETER STATIS
+    </button>
+
+    <div id="staticData" class="section-content">
+      <h2>Parameter Statis Desa Cikondong</h2>
+
+      <div class="parameter-grid">
+
+        <div class="parameter-card">
+          <h3>1. ⛰️ Kemiringan Lereng</h3>
+          <p>Lereng 4°–24°, dengan bagian mahkota gerakan tanah 13°–28°.</p>
+          <p><b>Skor kondisi: 4</b></p>
+          <span class="type">STATIS • TETAP</span>
+        </div>
+
+        <div class="parameter-card">
+          <h3>2. 🪨 Jenis Batuan</h3>
+          <p>Breksi vulkanik mengalami pelapukan, perubahan, dan deformasi.</p>
+          <p><b>Skor kondisi: 5</b></p>
+          <span class="type">STATIS • TETAP</span>
+        </div>
+
+        <div class="parameter-card">
+          <h3>3. 🌱 Jenis Tanah</h3>
+          <p>Tanah pelapukan bersifat lepas dan mudah runtuh; karakteristik lempung berpasir.</p>
+          <p><b>Skor kondisi: 4</b></p>
+          <span class="type">STATIS • TETAP</span>
+        </div>
+
+        <div class="parameter-card">
+          <h3>4. 🌾 Tata Guna Lahan</h3>
+          <p>Permukiman, kebun, ladang, sawah, dan hutan; terdapat aktivitas/permukiman pada wilayah bergerak.</p>
+          <p><b>Skor kondisi: 4</b></p>
+          <span class="type">STATIS • TETAP</span>
+        </div>
+
+        <div class="parameter-card">
+          <h3>5. 💧 Kondisi Drainase</h3>
+          <p>Aliran permukaan tidak terkendali dan drainase jalan/permukiman belum tertata baik; air dapat masuk melalui rekahan.</p>
+          <p><b>Skor kondisi: 5</b></p>
+          <span class="type">STATIS • TETAP</span>
+        </div>
+
       </div>
     </div>
+  </section>
 
-    <!-- INFORMASI -->
-    <div class="info">
-      <h2>ℹ️ Informasi Sistem</h2>
+  <section class="section">
+    <button class="section-button" onclick="toggleSection('dynamicData')">
+      📡 DATA 4 PARAMETER DINAMIS
+    </button>
 
-      <p>
-        Sistem ini digunakan untuk memantau perubahan kondisi tanah
-        melalui integrasi parameter statis dan dinamis.
-        Parameter statis menggambarkan kondisi dasar lokasi,
-        sedangkan parameter dinamis digunakan untuk memantau
-        perubahan kondisi secara berkala.
-      </p>
+    <div id="dynamicData" class="section-content">
 
-      <br>
+      <h2>Parameter Dinamis</h2>
 
-      <p>
-        Prototype menggunakan ESP32 sebagai mikrokontroler,
-        sensor kelembapan tanah untuk parameter kadar air,
-        MPU6050 untuk merepresentasikan perubahan kemiringan,
-        dan potensiometer untuk merepresentasikan pergeseran horizontal.
-      </p>
+      <div class="parameter-grid">
+
+        <div class="parameter-card">
+          <h3>6. 🌧️ Curah Hujan</h3>
+          <p><b>Nilai simulasi:</b> 321 mm</p>
+          <p><b>Kriteria:</b> 272–392 mm</p>
+          <p><b>Skor kondisi:</b> 4</p>
+          <span class="type">DINAMIS • NILAI TETAP DARI WORD</span>
+        </div>
+
+        <div class="parameter-card">
+          <h3>7. 💦 Kadar Air Tanah</h3>
+          <p><b>Nilai:</b> <span id="moistureDetail">Menunggu data sensor</span></p>
+          <p><b>Indikator:</b> Saturation index</p>
+          <p><b>Skor kondisi:</b> <span id="moistureScore">Menunggu data</span></p>
+          <span class="type">DINAMIS • SENSOR</span>
+        </div>
+
+        <div class="parameter-card">
+          <h3>8. 📐 Tilt Rate</h3>
+          <p><b>Nilai simulasi:</b> 0,08°/jam</p>
+          <p><b>Kriteria:</b> 0,05–&lt;0,20°/jam</p>
+          <p><b>Skor kondisi:</b> 3</p>
+          <span class="type">DINAMIS • NILAI TETAP DARI WORD</span>
+        </div>
+
+        <div class="parameter-card">
+          <h3>9. ↔️ Pergeseran Horizontal</h3>
+          <p><b>Nilai:</b> <span id="shiftDetail">Menunggu data sensor</span></p>
+          <p><b>Indikator:</b> Laju perpindahan (mm/jam)</p>
+          <p><b>Skor kondisi:</b> <span id="shiftScore">Menunggu data</span></p>
+          <span class="type">DINAMIS • SENSOR</span>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-  </div>
+  <section class="section">
+    <button class="section-button" onclick="toggleSection('criteriaData')">
+      📚 KRITERIA SKOR PARAMETER DINAMIS
+    </button>
 
-  <footer>
-    © 2026 Monitoring Pergeseran Tanah
-    <br>
-    Desa Cikondong - Kecamatan Cineam - Kabupaten Tasikmalaya
-  </footer>
+    <div id="criteriaData" class="section-content">
+      <h2>Kriteria Penilaian dari Dokumen Word</h2>
 
-  <script>
-    // SUPABASE
-    const SUPABASE_URL =
-      "https://tfqabpqniggaofcfghxv.supabase.co";
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Skor 1</th>
+              <th>Skor 2</th>
+              <th>Skor 3</th>
+              <th>Skor 4</th>
+              <th>Skor 5</th>
+            </tr>
+          </thead>
 
-    const SUPABASE_KEY =
-      "sb_publishable_4L6_KdSHXvYSDN1yKuBbZQ_4LEVsDUz";
+          <tbody>
+            <tr>
+              <td>Curah hujan (mm)</td>
+              <td>≤59</td>
+              <td>60–177</td>
+              <td>178–271</td>
+              <td>272–392</td>
+              <td>&gt;392</td>
+            </tr>
 
-    // TOGGLE SECTION
-    function toggleSection(id) {
-      const section = document.getElementById(id);
+            <tr>
+              <td>Saturation index</td>
+              <td>&lt;0,50</td>
+              <td>0,50–&lt;0,80</td>
+              <td>0,80–&lt;1,00</td>
+              <td>≥1,00</td>
+              <td>≥1,00 + indikasi pergerakan</td>
+            </tr>
+
+            <tr>
+              <td>Tilt rate (°/jam)</td>
+              <td>&lt;0,005</td>
+              <td>0,005–&lt;0,05</td>
+              <td>0,05–&lt;0,20</td>
+              <td>≥0,20</td>
+              <td>≥0,50</td>
+            </tr>
+
+            <tr>
+              <td>Pergeseran (mm/jam)</td>
+              <td>&lt;0,5</td>
+              <td>0,5–&lt;5</td>
+              <td>5–&lt;20</td>
+              <td>20–&lt;50</td>
+              <td>≥50</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc-note">
+        Catatan: dokumen Word menuliskan skor 4 untuk saturation index ≥1,00 dan skor 5 untuk ≥1,00 disertai indikasi pergerakan. Sistem membedakan skor 4 dan 5 berdasarkan ada atau tidaknya indikasi pergerakan.
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section">
+    <button class="section-button" onclick="toggleSection('weightData')">
+      ⚖️ BOBOT 9 PARAMETER PENELITIAN
+    </button>
+
+    <div id="weightData" class="section-content">
+      <h2>Tabel Pembobotan</h2>
+      <p>Total skor pembobotan 65 dan total bobot 100%.</p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Parameter</th>
+              <th>Frekuensi</th>
+              <th>Relevansi</th>
+              <th>Total skor</th>
+              <th>Bobot</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr><td>1</td><td>Kemiringan lereng</td><td>5</td><td>4</td><td>9</td><td>13,85%</td></tr>
+            <tr><td>2</td><td>Jenis batuan</td><td>5</td><td>5</td><td>10</td><td>15,38%</td></tr>
+            <tr><td>3</td><td>Jenis tanah</td><td>3</td><td>4</td><td>7</td><td>10,77%</td></tr>
+            <tr><td>4</td><td>Tata guna lahan</td><td>4</td><td>5</td><td>9</td><td>13,85%</td></tr>
+            <tr><td>5</td><td>Kondisi drainase</td><td>2</td><td>3</td><td>5</td><td>7,69%</td></tr>
+            <tr><td>6</td><td>Curah hujan</td><td>4</td><td>3</td><td>7</td><td>10,77%</td></tr>
+            <tr><td>7</td><td>Kadar air tanah</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
+            <tr><td>8</td><td>Tilt rate</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
+            <tr><td>9</td><td>Pergeseran horizontal</td><td>1</td><td>5</td><td>6</td><td>9,23%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>ℹ️ Informasi Sistem</h2>
+
+    <p>
+      Lima parameter statis menggunakan skor kondisi tetap dari dokumen Word.
+      Curah hujan 321 mm dan tilt rate 0,08°/jam juga menggunakan nilai tetap.
+      Hanya kadar air tanah dan pergeseran horizontal yang mengambil data dari Supabase.
+    </p>
+
+    <p>
+      Rumus IRGT = Σ (bobot × skor kondisi).
+      Klasifikasi: 1,00–2,33 Rendah/Aman;
+      2,34–3,67 Sedang/Siaga;
+      3,68–5,00 Tinggi/Darurat.
+    </p>
+
+    <p>
+      <b>Catatan sensor:</b> kolom kelembapan harus berisi saturation index (0–1 atau 0–100%).
+      Kolom pergeseran diasumsikan dalam cm. Sistem menghitung laju pergeseran
+      dari selisih dua catatan sensor dan waktu pencatatannya.
+      Jika format data ESP32 berbeda, konversi perlu disesuaikan.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Monitoring Pergeseran Tanah<br>
+  Desa Cikondong – Kecamatan Cineam – Kabupaten Tasikmalaya
+</footer>
+
+<script>
+const SUPABASE_URL = "https://tfqabpqniggaofcfghxv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_4L6_KdSHXvYSDN1yKuBbZ_4LEVsDUz";
+const TABLE_URL = SUPABASE_URL + "/rest/v1/Sensor%20Data";
+
+const POLL_INTERVAL_MS = 2000;
+
+const parameters = [
+  {name:"Kemiringan lereng",type:"Statis",value:"4°–24°; mahkota 13°–28°",score:4,weight:0.1385},
+  {name:"Jenis batuan",type:"Statis",value:"Breksi vulkanik lapuk dan terdeformasi",score:5,weight:0.1538},
+  {name:"Jenis tanah",type:"Statis",value:"Tanah pelapukan lepas; lempung berpasir",score:4,weight:0.1077},
+  {name:"Tata guna lahan",type:"Statis",value:"Permukiman, kebun, ladang, sawah, hutan",score:4,weight:0.1385},
+  {name:"Kondisi drainase",type:"Statis",value:"Aliran permukaan tidak terkendali; air masuk rekahan",score:5,weight:0.0769},
+  {name:"Curah hujan",type:"Dinamis tetap",value:"321 mm",score:4,weight:0.1077},
+  {name:"Kadar air tanah",type:"Dinamis sensor",value:"Menunggu sensor",score:null,weight:0.0923},
+  {name:"Tilt rate",type:"Dinamis tetap",value:"0,08°/jam",score:3,weight:0.0923},
+  {name:"Pergeseran horizontal",type:"Dinamis sensor",value:"Menunggu sensor",score:null,weight:0.0923}
+];
+
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+
+function fmt(n, d = 4) {
+  return Number(n).toLocaleString("id-ID", {
+    minimumFractionDigits: d,
+    maximumFractionDigits: d
+  });
+}
+
+function setConnection(message, color = "#64748b") {
+  const el = document.getElementById("connection");
+  el.textContent = message;
+  el.style.color = color;
+}
+
+function scoreMoisture(raw, movementDetected) {
+  if (raw === null || raw === undefined || raw === "") {
+    return {score:null, display:"Tidak ada data"};
+  }
+
+  let value = Number(raw);
+
+  if (!Number.isFinite(value)) {
+    return {score:null, display:"Data tidak valid"};
+  }
+
+  if (value > 1 && value <= 100) {
+    value = value / 100;
+  }
+
+  if (value < 0 || value > 1) {
+    return {
+      score:null,
+      display:"Format belum sesuai (perlu saturation index 0–1)"
+    };
+  }
+
+  let score;
+
+  if (value < 0.50) score = 1;
+  else if (value < 0.80) score = 2;
+  else if (value < 1.00) score = 3;
+  else score = movementDetected ? 5 : 4;
+
+  return {
+    score:score,
+    display:fmt(value,3),
+    value:value
+  };
+}
+
+function scoreShift(rate) {
+  if (rate === null || !Number.isFinite(rate) || rate < 0) {
+    return null;
+  }
+
+  if (rate < 0.5) return 1;
+  if (rate < 5) return 2;
+  if (rate < 20) return 3;
+  if (rate >= 50) return 5;
+
+  return 4;
+}
+
+function classifyIRGT(value) {
+  if (value <= 2.33) {
+    return {
+      category:"Rendah",
+      status:"AMAN",
+      color:"#16a34a"
+    };
+  }
+
+  if (value <= 3.67) {
+    return {
+      category:"Sedang",
+      status:"SIAGA",
+      color:"#d97706"
+    };
+  }
+
+  return {
+    category:"Tinggi",
+    status:"DARURAT",
+    color:"#dc2626"
+  };
+}
+
+function renderTable() {
+  const body = document.getElementById("calculationRows");
+
+  body.innerHTML = parameters.map((p, i) => {
+    const product = p.score === null ? null : p.weight * p.score;
+
+    return `
+      <tr>
+        <td>${i+1}</td>
+        <td>${p.name}</td>
+        <td>${p.type}</td>
+        <td>${p.value}</td>
+        <td>${p.score === null ? "—" : p.score}</td>
+        <td>${fmt(p.weight,4)}</td>
+        <td>${product === null ? "Menunggu" : fmt(product,4)}</td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function updateCalculation(moistureResult, shiftRate) {
+  const moistureScore = moistureResult.score;
+  const shiftScore = scoreShift(shiftRate);
+
+  parameters[6].score = moistureScore;
+  parameters[6].value = moistureResult.display;
+
+  parameters[8].score = shiftScore;
+  parameters[8].value = shiftRate === null
+    ? "Menunggu data laju"
+    : fmt(shiftRate,2) + " mm/jam";
+
+  document.getElementById("moistureScore").textContent =
+    moistureScore ?? "Belum dapat dinilai";
+
+  document.getElementById("shiftScore").textContent =
+    shiftScore ?? "Menunggu data laju";
+
+  document.getElementById("moistureDetail").textContent =
+    moistureResult.display;
+
+  document.getElementById("shiftDetail").textContent =
+    shiftRate === null
+      ? "Menunggu dua data sensor berbeda waktu"
+      : fmt(shiftRate,2) + " mm/jam";
+
+  document.getElementById("shiftRate").textContent =
+    shiftRate === null ? "--" : fmt(shiftRate,2);
+
+  renderTable();
+
+  const ready = parameters.every(p => p.score !== null);
+
+  if (!ready) {
+    document.getElementById("statusText").textContent = "DATA BELUM LENGKAP";
+    document.getElementById("statusText").style.color = "#64748b";
+
+    document.getElementById("statusDetail").textContent =
+      "IRGT belum dihitung karena skor sensor belum lengkap atau format kadar air belum sesuai.";
+
+    document.getElementById("irgtValue").textContent = "--";
+    document.getElementById("irgtCategory").textContent = "--";
+    document.getElementById("irgtStatus").textContent = "--";
+    document.getElementById("irgtTotal").textContent = "Menunggu";
+
+    document.getElementById("calcExplanation").textContent =
+      "Skor kadar air harus berupa saturation index (0–1 atau 0–100%). Skor pergeseran memerlukan dua catatan sensor dengan waktu berbeda.";
+
+    return;
+  }
+
+  const total = parameters.reduce(
+    (sum,p) => sum + p.weight * p.score,
+    0
+  );
+
+  const cls = classifyIRGT(total);
+
+  document.getElementById("irgtTotal").textContent = fmt(total,4);
+  document.getElementById("irgtValue").textContent = fmt(total,4);
+  document.getElementById("irgtCategory").textContent = cls.category;
+  document.getElementById("irgtStatus").textContent = cls.status;
+
+  document.getElementById("statusText").textContent = cls.status;
+  document.getElementById("statusText").style.color = cls.color;
+
+  document.getElementById("statusDetail").textContent =
+    "Kategori " + cls.category + " dengan nilai IRGT " + fmt(total,4) + ".";
+
+  document.getElementById("calcExplanation").textContent =
+    "IRGT = Σ (bobot × skor kondisi). Curah hujan 321 mm (skor 4) dan tilt rate 0,08°/jam (skor 3) menggunakan nilai tetap dokumen Word.";
+}
+
+async function getLatestData() {
+  try {
+    const url = TABLE_URL +
+      "?select=pergeseran,kelembapan,created_at" +
+      "&order=created_at.desc&limit=2";
+
+    const response = await fetch(url, {
+      headers: {
+        "apikey":SUPABASE_KEY,
+        "Authorization":"Bearer " + SUPABASE_KEY
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
+
+    const rows = await response.json();
+
+    if (!rows.length) {
+      setConnection("Terhubung, tetapi belum ada data sensor.", "#b45309");
+      return;
+    }
+
+    const latest = rows[0];
+    const moistureRaw = latest.kelembapan;
+
+    document.getElementById("moisture").textContent =
+      moistureRaw == null ? "--" : fmt(Number(moistureRaw),3);
+
+    let rate = null;
+
+    if (rows.length >= 2) {
+      const previous = rows[1];
+
+      const t1 = new Date(latest.created_at).getTime();
+      const t0 = new Date(previous.created_at).getTime();
+
+      const elapsedHours = (t1 - t0) / 3600000;
+
+      const currentShift = Number(latest.pergeseran);
+      const oldShift = Number(previous.pergeseran);
 
       if (
-        section.style.display === "none" ||
-        section.style.display === ""
+        Number.isFinite(currentShift) &&
+        Number.isFinite(oldShift) &&
+        elapsedHours > 0
       ) {
-        section.style.display = "block";
-      } else {
-        section.style.display = "none";
+        // Diasumsikan kolom pergeseran tersimpan dalam cm.
+        rate = Math.abs(currentShift - oldShift) * 10 / elapsedHours;
       }
     }
 
-    // AMBIL DATA TERBARU DARI SUPABASE
-    async function getLatestData() {
-      try {
-        const url =
-          SUPABASE_URL +
-          "/rest/v1/Sensor%20Data" +
-          "?select=pergeseran,kelembapan,kemiringan,created_at" +
-          "&order=created_at.desc" +
-          "&limit=1";
+    const movementDetected = rate !== null && rate >= 0.5;
 
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY
-          }
-        });
+    const moistureResult = scoreMoisture(
+      moistureRaw,
+      movementDetected
+    );
 
-        if (!response.ok) {
-          throw new Error("HTTP Error: " + response.status);
-        }
+    updateCalculation(moistureResult,rate);
 
-        const data = await response.json();
+    setConnection(
+      "Terhubung ke Supabase • data sensor berhasil dibaca",
+      "#16a34a"
+    );
 
-        if (!data || data.length === 0) {
-          console.log("Belum ada data sensor.");
-          return;
-        }
+    document.getElementById("updated").textContent =
+      "Pembaruan data: " +
+      new Date(latest.created_at).toLocaleString("id-ID");
 
-        const sensor = data[0];
+  } catch (error) {
+    console.error(error);
 
-        // KELEMBAPAN
-        document.getElementById("moisture").textContent =
-          sensor.kelembapan ?? "--";
+    setConnection(
+      "Gagal membaca Supabase: " + error.message,
+      "#dc2626"
+    );
+  }
+}
 
-        // PERGESERAN
-        document.getElementById("shift").textContent =
-          sensor.pergeseran != null
-            ? Number(sensor.pergeseran).toFixed(2)
-            : "--";
+renderTable();
+getLatestData();
 
-        // TILT RATE
-        document.getElementById("tilt").textContent =
-          sensor.kemiringan != null
-            ? Number(sensor.kemiringan).toFixed(2)
-            : "--";
-
-        // STATUS
-        updateStatus(
-          Number(sensor.pergeseran || 0),
-          Number(sensor.kemiringan || 0)
-        );
-
-        console.log("Data sensor terbaru:", sensor);
-
-      } catch (error) {
-        console.error("Gagal mengambil data Supabase:", error);
-      }
-    }
-
-    // STATUS KONDISI TANAH
-    function updateStatus(pergeseran, kemiringan) {
-      const statusText = document.getElementById("statusText");
-
-      if (pergeseran >= 10) {
-        statusText.textContent = "GAWAT DARURAT";
-        statusText.style.color = "#dc2626";
-
-      } else if (pergeseran >= 7.35) {
-        statusText.textContent = "SIAGA 3";
-        statusText.style.color = "#ea580c";
-
-      } else if (pergeseran >= 3) {
-        statusText.textContent = "SIAGA 2";
-        statusText.style.color = "#d97706";
-
-      } else if (pergeseran >= 2) {
-        statusText.textContent = "SIAGA 1";
-        statusText.style.color = "#ca8a04";
-
-      } else if (pergeseran > 0) {
-        statusText.textContent = "WASPADA PERGESERAN";
-        statusText.style.color = "#eab308";
-
-      } else {
-        statusText.textContent = "AMAN";
-        statusText.style.color = "#16a34a";
-      }
-    }
-
-    // JALANKAN SAAT WEBSITE DIBUKA
-    getLatestData();
-
-    // UPDATE OTOMATIS SETIAP 1 DETIK
-    setInterval(getLatestData, 1000);
-  </script>
+setInterval(getLatestData, POLL_INTERVAL_MS);
+</script>
 
 </body>
 </html>
